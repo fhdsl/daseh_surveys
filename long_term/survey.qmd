@@ -27,23 +27,23 @@ library(surveydown)
 
 ::: {.sd_page id=welcome}
 
-# DaSEH 1-Year Survey
+# DaSEH Follow-up Survey
 
 Thank you for taking the time to participate in this survey. We are collecting data about user experience with our course to learn more about how to improve the data science education experience. This data may ultimately be used for a research publication and reporting to the NIH.
 
-DATA CONFIDENTIALITY: We will collect your name in order to track your progress through the course. We will also ask optional demographic information. The potential risks to you are small. The potential benefits to the community of data scientists, developers, and professors are very high – we will be able to learn how we can improve data science/environmental health education material.
+**DATA CONFIDENTIALITY:** This survey is anonymous. The potential risks to you are small. The potential benefits to the community of data scientists, developers, and professors are very high – we will be able to learn how we can improve data science/environmental health education material.
 
-DATA SHARING: We plan to release the data collected from this survey only in aggregate form using GitHub (https://github.com/). No personally identifiable information (such as your name or response timestamp) will be shared.
+**DATA SHARING:** We plan to release the data collected from this survey only in aggregate form using GitHub (https://github.com/). No personally identifiable information is collected or will be shared.
 
-PARTICIPATION: You must be 18 or over to participate. You will be asked a series of questions about you, your institution type, your prior experience, and your expectations for the course. You can stop participating in the survey at any point. You do not need to answer optional questions. Only answers that are submitted by clicking the submit button at the end of the survey will be recorded. Depending on how you answer the survey, this will take ~10 minutes to complete. You will have an opportunity before submission to edit your responses. Any answers that are ultimately submitted (and not removed by the participant) will continue to be used for research.
+**PARTICIPATION:** You must be 18 or over to participate. You will be asked a series of questions about your experience following the DaSEH course you previously took. You can stop participating in the survey at any point. You do not need to answer optional questions. 
 
-General information about traffic to the case study websites and our main website (https://daseh.org/) is being tracked by Google Analytics (https://analytics.google.com). This provides us with summary information such as the number of visitors from different countries. We will not use this to try to identify who has submitted a survey response.
+Depending on how you answer the survey, this will take **~10 minutes** to complete. You will have an opportunity before submission to edit your responses. Any answers that are ultimately submitted (and not removed by the participant) will continue to be used for research.
 
-RISK: Risk of participation is minimal. The questions we ask pose minimal security risk to participants as they focus on your personal experience and expectations. Demographic questions are optional. While we have taken measures to ensure the security of the survey responses, please be aware that no online system is completely secure. By participating in this survey, you understand and accept the inherent risks associated with transmitting information over the internet.
+**RISK:** Risk of participation is minimal. The questions we ask pose minimal security risk to participants as they focus on your personal experience and expectations. While we have taken measures to ensure the security of the survey responses, please be aware that no online system is completely secure. By participating in this survey, you understand and accept the inherent risks associated with transmitting information over the internet.
 
-CONSENT: The first questions will ask about your age and if you consent (or agree) that the data from your responses be used for research purposes.
+**CONSENT:** The first questions will ask if you are over 18 and if you consent (or agree) that the data from your responses be used for research purposes.
 
-QUESTIONS OR PROBLEMS: If you have questions or problems, email Ava Hoffman at ahoffma2@fredhutch.org or contact us through the anonymous Code of Conduct Reporting Form.
+**QUESTIONS OR PROBLEMS:** If you have questions or problems, email Ava Hoffman at ahoffma2@fredhutch.org or contact us through the anonymous Code of Conduct Reporting Form.
 
 You may also contact the Fred Hutchinson Cancer Center IRB Office if you have questions about your rights as a participant. Contact the IRB if you feel you have not been treated fairly or if you have other concerns.
 
@@ -62,13 +62,13 @@ You cannot participate in this survey if you are under 18.
 
 ```{r}
 sd_question(
-  type  = 'mc',
-  id    = 'consent',
-  label = "Are you 18 or over?",
+  type   = 'mc',
+  id     = 'consent',
+  label  = "Are you 18 or over?",
   option = c(
-    'Yes'    = 'yes',
+    'Yes' = 'yes', 
     'No' = 'no'
-  )
+)
 )
 sd_next()
 ```
@@ -79,9 +79,9 @@ sd_next()
 
 ```{r}
 sd_question(
-  type  = 'mc',
-  id    = 'how_often_before',
-  label = "How often did you use R before DaSEH?",
+  type   = 'mc',
+  id     = 'how_often_before',
+  label  = "How often did you use R before DaSEH?",
   option = c(
     'Extensively (daily or near daily)'    = 'extensively',
     'Regularly (weekly or more)' = 'weekly',
@@ -92,15 +92,25 @@ sd_question(
 )
 
 sd_question(
-  type  = 'mc',
-  id    = 'how_often_now',
-  label = "How often do you use R now?",
+  type   = 'mc',
+  id     = 'how_often_now',
+  label  = "How often do you use R now?",
   option = c(
     'Extensively (daily or near daily)' = 'extensively',
     'Regularly (weekly or more)' = 'weekly',
     'A few times to occasionally' = 'occasionally',
     'Less than a few times' = 'few',
     'Never since DaSEH' = 'never'
+  )
+)
+
+sd_question(
+  type   = 'mc',
+  id     = 'codeathon',
+  label  = "Did you participate in the code-a-thon event at Fred Hutch?",
+  option = c(
+    'Yes' = 'yes', 
+    'No' = 'no'
   )
 )
 
@@ -113,9 +123,9 @@ sd_next()
 
 ```{r}
 sd_question(
-  type  = 'mc_multiple',
-  id    = 'r_use_cases',
-  label = "What do you use R for? (Select all that apply)",
+  type   = 'mc_multiple',
+  id     = 'r_use_cases',
+  label  = "What do you use R for? (Select all that apply)",
   option = c(
     'Data analysis and statistics' = 'data_analysis',
     'Data visualization and graphics' = 'visualization',
@@ -151,9 +161,9 @@ sd_next()
 
 ```{r}
 sd_question(
-  type  = 'mc_multiple',
-  id    = 'why_not_using_r',
-  label = "Why aren't you using R? (Select all that apply)",
+  type   = 'mc_multiple',
+  id     = 'why_not_using_r',
+  label  = "Why aren't you using R? (Select all that apply)",
   option = c(
     'I don\'t have a need for it in my work' = 'no_need',
     'I don\'t feel confident enough yet' = 'not_confident',
@@ -175,29 +185,29 @@ sd_next()
 
 ```{r}
 sd_question(
-  type  = 'mc',
-  id    = 'courses_materials',
-  label = "Have you continued learning R through other courses or materials?",
+  type   = 'mc',
+  id     = 'courses_materials',
+  label  = "Have you continued learning R through other courses or materials?",
   option = c(
-    'Yes'    = 'yes',
+    'Yes' = 'yes',
     'No' = 'no'
   )
 )
 
 sd_question(
-  type  = 'mc',
-  id    = 'recommended',
-  label = "Have you recommended DaSEH materials to others?",
+  type   = 'mc',
+  id     = 'recommended',
+  label  = "Have you recommended DaSEH materials to others?",
   option = c(
-    'Yes'    = 'yes',
+    'Yes' = 'yes',
     'No' = 'no'
   )
 )
 
 sd_question(
-  type  = 'mc_multiple',
-  id    = 'recommended',
-  label = "Have you returned to any DaSEH materials? (select all that apply)",
+  type   = 'mc_multiple',
+  id     = 'recommended',
+  label  = "Have you returned to any DaSEH materials? (select all that apply)",
   option = c(
     'Slides / pdfs' = 'slides',
     'Cheatsheets' = 'cheatsheets',
@@ -215,9 +225,9 @@ sd_next()
 
 ```{r}
 sd_question(
-  type  = 'mc',
-  id    = 'part_of_journey',
-  label = "DaSEH was an important part of my programming journey.",
+  type   = 'mc',
+  id     = 'part_of_journey',
+  label  = "DaSEH was an important part of my programming journey.",
   option = c(
     "Strongly Disagree" = "strong_disagree",
     "Disagree"          = "disagree",
