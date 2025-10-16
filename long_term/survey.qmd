@@ -19,6 +19,15 @@ highlight-unanswered: true
 highlight-color: blue
 capture-metadata: true
 all-questions-required: false
+required_questions:
+  - consent'
+  - how_often_before
+  - how_often_now
+  - codeathon
+  - courses_materials
+  - recommended
+  - returned
+  - part_of_journey
 ---
 
 ```{r}
@@ -206,7 +215,7 @@ sd_question(
 
 sd_question(
   type   = 'mc_multiple',
-  id     = 'recommended',
+  id     = 'returned',
   label  = "Have you returned to any DaSEH materials? (select all that apply)",
   option = c(
     'Slides / pdfs' = 'slides',
@@ -240,7 +249,7 @@ sd_question(
 sd_question(
   type  = 'text',
   id    = 'part_of_journey_text',
-  label = "(optional) In 1-2 sentences tell us about your response above."
+  label = "In 1-2 sentences tell us about your response above."
 )
 
 sd_question(
