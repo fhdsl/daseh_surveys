@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>survey</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="survey_files/libs/clipboard/clipboard.min.js"></script>
+<script src="survey_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="survey_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="survey_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="survey_files/libs/quarto-html/popper.min.js"></script>
+<script src="survey_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="survey_files/libs/quarto-html/anchor.min.js"></script>
+<link href="survey_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="survey_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="survey_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="survey_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="survey_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+
+
+
+<div id="welcome" class="sd_page">
+<section id="daseh-follow-up-survey" class="level1">
+<h1>DaSEH Follow-up Survey</h1>
+<p>Thank you for taking the time to participate in this survey. We are collecting data about user experience with our course to learn more about how to improve the data science education experience. This data may ultimately be used for a research publication and reporting to the NIH.</p>
+<p><strong>DATA CONFIDENTIALITY:</strong> This survey is anonymous. The potential risks to you are small. The potential benefits to the community of data scientists, developers, and professors are very high – we will be able to learn how we can improve data science/environmental health education material.</p>
+<p><strong>DATA SHARING:</strong> We plan to release the data collected from this survey only in aggregate form using GitHub (https://github.com/). No personally identifiable information is collected or will be shared.</p>
+<p><strong>PARTICIPATION:</strong> You must be 18 or over to participate. You will be asked a series of questions about your experience following the DaSEH course you previously took. You can stop participating in the survey at any point. You do not need to answer optional questions.</p>
+<p>Depending on how you answer the survey, this will take <strong>2-4 minutes</strong> to complete. You will have an opportunity before submission to edit your responses. Any answers that are ultimately submitted (and not removed by the participant) will continue to be used for research.</p>
+<p><strong>RISK:</strong> Risk of participation is minimal. The questions we ask pose minimal security risk to participants as they focus on your personal experience and expectations. While we have taken measures to ensure the security of the survey responses, please be aware that no online system is completely secure. By participating in this survey, you understand and accept the inherent risks associated with transmitting information over the internet.</p>
+<p><strong>CONSENT:</strong> The first questions will ask if you are over 18 and if you consent (or agree) that the data from your responses be used for research purposes.</p>
+<p><strong>QUESTIONS OR PROBLEMS:</strong> If you have questions or problems, email Ava Hoffman at ahoffma2@fredhutch.org or contact us through the anonymous Code of Conduct Reporting Form.</p>
+<p>You may also contact the Fred Hutchinson Cancer Center IRB Office if you have questions about your rights as a participant. Contact the IRB if you feel you have not been treated fairly or if you have other concerns.</p>
+<p>This study has been deemed exempt by the Fred Hutchinson Cancer Center IRB, specifically Exempt status (Category (2)(ii) Tests, surveys, interviews, or observation (low risk)). Thus, the proposed activity does not qualify as human subjects research as defined by DHHS regulations 45 CFR 46.102, and does not require IRB oversight.</p>
+<p>IRB No.: FHIRB0020064<br>
+Date Approved: 3/19/2024</p>
+<p>The IRB contact information is:<br>
+Address: Fred Hutch Cancer Center Institutional Review Office<br>
+1100 Fairview Ave. N. Mail Stop J2-100, Seattle, WA 98109<br>
+Telephone: 206-667-5900<br>
+E-mail: iro@fredhutch.org</p>
+<p>You cannot participate in this survey if you are under 18.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="container-consent" data-question-id="consent" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('consent_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('consent_interacted', true, {priority: 'event'});">
+<div id="consent" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="consent-label">
+<label class="control-label" id="consent-label" for="consent"><p>Are you 18 or over?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="consent" value="yes">
+<span>Yes</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="consent" value="no">
+<span>No</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 1rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div id="page2" class="sd_page">
+<div class="cell">
+<div class="cell-output-display">
+<div id="container-how_often_before" data-question-id="how_often_before" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('how_often_before_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('how_often_before_interacted', true, {priority: 'event'});">
+<div id="how_often_before" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="how_often_before-label">
+<label class="control-label" id="how_often_before-label" for="how_often_before"><p>How often did you use R before DaSEH?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="how_often_before" value="extensively">
+<span>Extensively (daily or near daily)</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="how_often_before" value="weekly">
+<span>Regularly (weekly or more)</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="how_often_before" value="occasionally">
+<span>A few times to occasionally</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="how_often_before" value="few">
+<span>Less than a few times</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="how_often_before" value="never">
+<span>Never used R before</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-how_often_now" data-question-id="how_often_now" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('how_often_now_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('how_often_now_interacted', true, {priority: 'event'});">
+<div id="how_often_now" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="how_often_now-label">
+<label class="control-label" id="how_often_now-label" for="how_often_now"><p>How often do you use R now?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="how_often_now" value="extensively">
+<span>Extensively (daily or near daily)</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="how_often_now" value="weekly">
+<span>Regularly (weekly or more)</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="how_often_now" value="occasionally">
+<span>A few times to occasionally</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="how_often_now" value="few">
+<span>Less than a few times</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="how_often_now" value="never">
+<span>Never since DaSEH</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-codeathon" data-question-id="codeathon" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('codeathon_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('codeathon_interacted', true, {priority: 'event'});">
+<div id="codeathon" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="codeathon-label">
+<label class="control-label" id="codeathon-label" for="codeathon"><p>Did you participate in the code-a-thon event at Fred Hutch?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="codeathon" value="yes">
+<span>Yes</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="codeathon" value="no">
+<span>No</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 1rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</div>
+<div id="page3a" class="sd_page">
+<div class="cell">
+<div class="cell-output-display">
+<div id="container-r_use_cases" data-question-id="r_use_cases" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('r_use_cases_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('r_use_cases_interacted', true, {priority: 'event'});">
+<div id="r_use_cases" class="form-group shiny-input-checkboxgroup shiny-input-container" role="group" aria-labelledby="r_use_cases-label">
+<label class="control-label" id="r_use_cases-label" for="r_use_cases"><p>What do you use R for? (Select all that apply)</p>
+</label>
+<div class="shiny-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="r_use_cases" value="data_analysis">
+<span>Data analysis and statistics</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="r_use_cases" value="visualization">
+<span>Data visualization and graphics</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="r_use_cases" value="data_cleaning">
+<span>Data cleaning and wrangling</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="r_use_cases" value="ml_modeling">
+<span>Machine learning and modeling</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="r_use_cases" value="academic">
+<span>Academic research</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="r_use_cases" value="reporting">
+<span>Reporting and communication</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="r_use_cases" value="bioinformatics">
+<span>Bioinformatics or genomics</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="r_use_cases" value="geospatial">
+<span>Geospatial analysis</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="r_use_cases" value="teaching">
+<span>Teaching or training others</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="r_use_cases" value="other">
+<span>Other</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-coding_practices" data-question-id="coding_practices" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('coding_practices_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('coding_practices_interacted', true, {priority: 'event'});">
+<div class="form-group shiny-input-container">
+<label class="control-label" id="coding_practices-label" for="coding_practices"><p>What is the most important coding practice you have adopted since DaSEH?</p>
+</label>
+<input id="coding_practices" type="text" class="shiny-input-text form-control" value="">
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-reproducibility_practices" data-question-id="reproducibility_practices" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('reproducibility_practices_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('reproducibility_practices_interacted', true, {priority: 'event'});">
+<div class="form-group shiny-input-container">
+<label class="control-label" id="reproducibility_practices-label" for="reproducibility_practices"><p>What is the most important reproducibility practice you have adopted since DaSEH?</p>
+</label>
+<input id="reproducibility_practices" type="text" class="shiny-input-text form-control" value="">
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 1rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</div>
+<div id="page3b" class="sd_page">
+<div class="cell">
+<div class="cell-output-display">
+<div id="container-why_not_using_r" data-question-id="why_not_using_r" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('why_not_using_r_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('why_not_using_r_interacted', true, {priority: 'event'});">
+<div id="why_not_using_r" class="form-group shiny-input-checkboxgroup shiny-input-container" role="group" aria-labelledby="why_not_using_r-label">
+<label class="control-label" id="why_not_using_r-label" for="why_not_using_r"><p>Why aren’t you using R? (Select all that apply)</p>
+</label>
+<div class="shiny-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="why_not_using_r" value="no_need">
+<span>I don’t have a need for it in my work</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="why_not_using_r" value="not_confident">
+<span>I don’t feel confident enough yet</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="why_not_using_r" value="prefer_other">
+<span>I prefer other tools or languages</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="why_not_using_r" value="lack_time">
+<span>Lack of time to practice</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="why_not_using_r" value="difficult">
+<span>Difficult to learn or understand</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="why_not_using_r" value="lack_support">
+<span>Lack of support or resources</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="why_not_using_r" value="workplace_culture">
+<span>My workplace/team doesn’t use R</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="why_not_using_r" value="forgot">
+<span>I forgot what I learned</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="why_not_using_r" value="other">
+<span>Other</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 1rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</div>
+<div id="page4" class="sd_page">
+<div class="cell">
+<div class="cell-output-display">
+<div id="container-courses_materials" data-question-id="courses_materials" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('courses_materials_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('courses_materials_interacted', true, {priority: 'event'});">
+<div id="courses_materials" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="courses_materials-label">
+<label class="control-label" id="courses_materials-label" for="courses_materials"><p>Have you continued learning R through other courses or materials?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="courses_materials" value="yes">
+<span>Yes</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="courses_materials" value="no">
+<span>No</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-recommended" data-question-id="recommended" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('recommended_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('recommended_interacted', true, {priority: 'event'});">
+<div id="recommended" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="recommended-label">
+<label class="control-label" id="recommended-label" for="recommended"><p>Have you recommended DaSEH materials to others?</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="recommended" value="yes">
+<span>Yes</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="recommended" value="no">
+<span>No</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-returned" data-question-id="returned" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('returned_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('returned_interacted', true, {priority: 'event'});">
+<div id="returned" class="form-group shiny-input-checkboxgroup shiny-input-container" role="group" aria-labelledby="returned-label">
+<label class="control-label" id="returned-label" for="returned"><p>Have you returned to any DaSEH materials? (select all that apply)</p>
+</label>
+<div class="shiny-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="returned" value="slides">
+<span>Slides / pdfs</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="returned" value="cheatsheets">
+<span>Cheatsheets</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="returned" value="video">
+<span>Video recordings</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="returned" value="none">
+<span>None of these</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 1rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</div>
+<div id="page5" class="sd_page">
+<div class="cell">
+<div class="cell-output-display">
+<div id="container-part_of_journey" data-question-id="part_of_journey" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('part_of_journey_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('part_of_journey_interacted', true, {priority: 'event'});">
+<div id="part_of_journey" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="part_of_journey-label">
+<label class="control-label" id="part_of_journey-label" for="part_of_journey"><p>DaSEH was an important part of my programming journey.</p>
+</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="part_of_journey" value="strong_disagree">
+<span>Strongly Disagree</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="part_of_journey" value="disagree">
+<span>Disagree</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="part_of_journey" value="neutral">
+<span>Neutral</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="part_of_journey" value="agree">
+<span>Agree</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="part_of_journey" value="strong_agree">
+<span>Strongly Agree</span>
+</label>
+</div>
+</div>
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-part_of_journey_text" data-question-id="part_of_journey_text" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('part_of_journey_text_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('part_of_journey_text_interacted', true, {priority: 'event'});">
+<div class="form-group shiny-input-container">
+<label class="control-label" id="part_of_journey_text-label" for="part_of_journey_text"><p>In 1-2 sentences tell us about your response above.</p>
+</label>
+<input id="part_of_journey_text" type="text" class="shiny-input-text form-control" value="">
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="container-impactful_text" data-question-id="impactful_text" class="question-container" style="width: 100%;" oninput="Shiny.setInputValue('impactful_text_interacted', true, {priority: 'event'});" onclick="Shiny.setInputValue('impactful_text_interacted', true, {priority: 'event'});">
+<div class="form-group shiny-input-container">
+<label class="control-label" id="impactful_text-label" for="impactful_text"><p>What was the most impactful thing you learned as part of DaSEH?</p>
+</label>
+<input id="impactful_text" type="text" class="shiny-input-text form-control" value="">
+</div>
+<span class="hidden-asterisk">*</span>
+</div>
+</div>
+<div class="cell-output-display">
+<div data-next-page="" style="margin-top: 1rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="page_id_next" onclick="Shiny.setInputValue('next_page', this.parentElement.getAttribute('data-next-page'));" style="display: block; margin: auto;" type="button">Next</button>
+</div>
+</div>
+</div>
+</div>
+<div id="end" class="sd_page">
+<section id="thank-you-for-taking-this-survey" class="level2">
+<h2 class="anchored" data-anchor-id="thank-you-for-taking-this-survey">Thank you for taking this survey!</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div style="margin-top: 0.5rem; margin-bottom: 0.5rem;">
+<button class="btn btn-default action-button sd-enter-button" id="close-survey-button" onclick="Shiny.setInputValue('show_exit_modal', true, {priority: 'event'});" style="display: block; margin: auto;" type="button">Exit Survey</button>
+</div>
+<script>
+      Shiny.addCustomMessageHandler('closeWindow', function(message) {
+        window.close();
+        if (!window.closed) {
+          alert('Please close this tab manually to exit the survey.');
+        }
+      });
+    </script>
+</div>
+</div>
+</section>
+</div>
+<div id="screenout" class="sd_page">
+<section id="thank-you-for-your-interest" class="level2">
+<h2 class="anchored" data-anchor-id="thank-you-for-your-interest">Thank you for your interest!</h2>
+<p>Unfortunately, you do not meet the eligibility requirements for this survey.</p>
+</section>
+</div>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
