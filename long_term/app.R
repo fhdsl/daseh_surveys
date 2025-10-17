@@ -58,4 +58,4 @@ shiny::shinyApp(ui = ui, server = server)
 
 # Create a print version ------------------------------------------------------
 
-# quarto_render(input = 'survey.qmd', output_format = 'html', output_file = 'print.html')
+# quarto::quarto_render(input = 'survey.qmd', output_format = 'html', output_file = 'print.html')
