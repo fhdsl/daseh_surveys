@@ -4,3 +4,12 @@ format: html
 editor: visual
 ---
 
+## Get the long term survey data
+
+```{r}
+library(surveydown)
+library(tidyverse)
+
+db <- sd_db_connect(gssencmode = "disable")
+dat_ <- sd_get_data(db) %>% filter(consent == "yes")
+```
