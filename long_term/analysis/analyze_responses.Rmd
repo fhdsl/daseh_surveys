@@ -14,7 +14,7 @@ library(tidytext)
 library(wordcloud)
 ```
 
-First, load and clean data (filter on consent, remove responses that are mostly NA or test, check IP addresses and manually remove or merge duplicates).
+First, load and clean data (filter on consent, check IP addresses and manually remove or merge duplicates, remove responses that are mostly `NA` or test).
 
 ```{r, echo = TRUE, eval = TRUE, results = 'hide', message = FALSE, warning = FALSE}
 db <- sd_db_connect(gssencmode = "disable")
@@ -96,7 +96,7 @@ using_R_likert %>%
   theme_minimal()
 ```
 
-Coloring by codeathon doesn't provide any particularly interesting insights. 
+Coloring by codeathon attedance doesn't provide any particularly interesting insights. 
 
 Interestingly, there is a small subset of people whose use is decreasing. Let's look into that. 
 
@@ -133,6 +133,8 @@ Data cleaning is the most common answer (all 24 participants who responded to th
 ### What is the most important coding practice since DaSEH?
 
 From reading responses, things that came up in multiple responses are `tidyverse` skills, data wrangling, and GitHub. 
+
+Sentiment analysis is done below and a wordcloud is made, but with a small sample size I think reading through the responses is more informative. I don't find the sentiment analysis particularly insightful here because most of the negative words are either positive in a data science context (like wrangle) or used in a positive way (like someone saying that they learned to check for errors). The word cloud captures what I read in the free responses. 
 
 ```{r}
 coding_text <- dat %>%
@@ -174,11 +176,9 @@ wordcloud(
 )
 ```
 
-I don't find the sentiment analysis particularly insightful here because most of the negative words are either positive in a data science context (like wrangle) or used in a positive way (like someone saying that they learned to check for errors). The word cloud is interesting and captures what I read in the free responses. 
-
 ### What is the most important reproducibility practice you have adopted since DaSEH?
 
-From reading responses, the topics that are repeated are project organization, using R markdown files, using notes/comments in code, and GitHub. 
+From reading responses, the topics that are repeated are project organization, using R markdown files, using notes/comments in code, and GitHub. Similarly, the sentiment analysis doesn't provide useful results but the word cloud detects similar concepts to what I read in the responses. 
 
 ```{r}
 reprod_text <- dat %>%
@@ -215,8 +215,6 @@ wordcloud(
   colors = rep(c("#5ab4ac", "#d8b364"), length.out = 200)
 )
 ```
-
-Similarly, the sentiment analysis doesn't provide useful results but the word cloud detects similar concepts to what I read in the responses. 
 
 ### Why aren't you using R? 
 
@@ -270,8 +268,6 @@ journey_likert %>%
     ),
   labels_size = 2, y_label_wrap = 35) + 
   theme(axis.text.y = element_text(size = 7))
-
-table(journey_likert$part_of_journey, journey_likert$codeathon)
 ```
 
 There were 4 respondents who said "strongly disagree", that I wanted to look a little closer at.
@@ -289,7 +285,7 @@ disagree %>%
 
 ### Free response about DaSEH and programming journey.
 
-Common topics in responses included returning to course materials, learning coding and R skills, workflows for data analysis, and understanding what tools exist. 
+Common topics in responses included returning to course materials, learning coding and R skills, workflows for data analysis, and understanding what tools exist. For this impact question, the sentiment analysis is more relevant. However, as before, the words that are classified as negative are used in a positive context. 
 
 ```{r}
 journey_text <- dat %>%
@@ -347,11 +343,9 @@ wordcloud(
 )
 ```
 
-For this impact question, the sentiment analysis is more relevant. However, as before, the words that are classified as negative are used in a positive context. 
-
 ### Most impactful thing learned as part of DaSEH.
 
-Topics including R/coding, organizing projects, and data wrangling. 
+Topics including R/coding, organizing projects, and data wrangling. Again, in the sentiment analysis the negative words are used in a positive context. The word cloud doesn't provide anything particularly interesting. 
 
 ```{r}
 impact_text <- dat %>%
@@ -408,5 +402,3 @@ wordcloud(
   colors = rep(c("#5ab4ac", "#d8b364"), length.out = 200)
 )
 ```
-
-The sentiment analysis is more useful for this, although the negative words are again out of context. The word cloud doesn't provide anything particularly interesting. 
