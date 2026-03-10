@@ -1,0 +1,183 @@
+---
+title: "Explore DaSEH one year post survey quantitative responses"
+author: "Sarah Teichman"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r, include = FALSE}
+library(surveydown)
+library(tidyverse)
+library(ggstats)
+library(ggalluvial)
+```
+
+First, load and clean data (filter on consent, check IP addresses and manually remove or merge duplicates, remove responses that are mostly `NA` or test).
+
+```{r, echo = FALSE, eval = TRUE, results = 'hide', message = FALSE, warning = FALSE}
+db <- sd_db_connect(gssencmode = "disable")
+dat <- sd_get_data(db) %>% filter(consent == "yes")
+```
+
+```{r, echo = FALSE, eval = TRUE, results = 'hide', message = FALSE, warning = FALSE}
+length(unique(dat$ip_address)) # 27, 4 repeats
+table(as.numeric(as.factor(dat$ip_address)))
+which(as.numeric(as.factor(dat$ip_address)) == 2)
+which(as.numeric(as.factor(dat$ip_address)) == 11)
+which(as.numeric(as.factor(dat$ip_address)) == 24)
+
+dat[c(20, 23, 24), ] # keep 20, drop 23 and 24 which are mostly NA
+dat[c(4, 13), ] # keep 4, drop 13 which is mostly NA
+dat[c(16, 19), ] # the same person, made it partway through in 16, then finished in 19, need to manually combine some text
+dat$coding_practices[19] <- dat$coding_practices[16]
+dat$reproducibility_practices[19] <- dat$reproducibility_practices[16]
+dat$part_of_journey_text[19] <- paste0(dat$part_of_journey_text[16], dat$part_of_journey_text[19])
+
+dat <- dat[-c(13, 16, 23, 24), ]
+
+"test" %in% as.matrix(dat) # check for "test" entries
+
+# check for mostly NA entries:
+dat %>% 
+  select(-contains("time"), -why_not_using_r) %>%
+  mutate(num_na = rowSums(is.na(across(everything())))) %>%
+  arrange(desc(num_na)) %>%
+  head(6)
+# the remaining entries with the most NAs are people who skipped the free responses, so keep these 
+# respondents in the analysis 
+```
+
+We are left with  `r nrow(dat)` responses. 
+
+### How often did you use R before DaSEH? After? 
+
+```{r, echo = FALSE, fig.height = 4}
+using_R_likert <- dat %>%
+  mutate(across(c(how_often_before, how_often_now), 
+                ~factor(.x, levels = c("never", "few", "occasionally",
+                                       "weekly", "extensively"))))
+using_R_likert %>%
+  select(how_often_before, how_often_now) %>%
+  gglikert(variable_labels = c(
+    how_often_before = "Frequency of using R before DaSEH",
+    how_often_now = "Frequency of using R now"
+    ),
+  labels_size = 2, y_label_wrap = 35) + 
+  theme(axis.text.y = element_text(size = 7))
+```
+
+The "never" group disappears after DaSEH, the "few" group decreases, the "occasionally" group increases, the "few" group decreases, and the "extensively" group increases. I was curious from this plot how people were moving between these groups. 
+
+```{r, echo = FALSE, fig.height = 4, warning = FALSE}
+using_R_likert %>%
+  count(how_often_before, how_often_now, name = "count") %>%
+  ggplot(aes(axis1 = how_often_before, axis2 = how_often_now, y = count)) + 
+  geom_alluvium(aes(fill = how_often_before)) +
+  geom_stratum() +
+  geom_text(stat = "stratum", aes(label = after_stat(stratum))) +
+  scale_x_discrete(limits = c("Frequency of using R before DaSEH", 
+                              "Frequency of using R now")) +
+  theme_minimal()
+```
+
+From this plot, it seems like the people with the least R experience ("never" and "few") all moved to using R more often (most to "occasionally"), and the people with the most R experience before ("weekly" and "extensively") nearly all are "extensive" users now. 
+
+Interestingly, there is a small subset of people whose use is decreasing. Let's look into that. 
+
+```{r, echo = FALSE}
+which(using_R_likert$how_often_before == "occasionally" & using_R_likert$how_often_now == "few")
+which(using_R_likert$how_often_before == "weekly" & using_R_likert$how_often_now == "occasionally")
+```
+
+One person who went "occasionally" to "few" started a new position that doesn't usually use R, but said they look forward to using R in the future. The second person who went from "occasionally" to "few" wanted to learn R in case they needed to teach it in a data science course, but the course is using different tools. The person who went from "weekly" to "occasionally" does not have a free response that explains this.
+
+### Did you participate in the code-a-thon at the Hutch?
+
+```{r}
+dat %>% count(codeathon)
+```
+
+### What do you use R for?
+
+```{r}
+r_use <- dat %>%
+  select(r_use_cases) %>%
+  separate_longer_delim(r_use_cases, delim = ",") %>%
+  mutate(r_use_cases = str_trim(r_use_cases))
+
+r_use %>%
+  filter(!is.na(r_use_cases)) %>%
+  ggplot(aes(x = r_use_cases)) + 
+  geom_bar() + 
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) 
+```
+
+Data cleaning is the most common answer (all 24 participants who responded to this question included data cleaning), followed by visualization (23) and data analysis (22). The impact of learning data cleaning comes up in the free responses below as well. 
+
+### Why aren't you using R? 
+
+```{r}
+table(is.na(dat$why_not_using_r))
+dat %>% 
+  filter(!is.na(why_not_using_r)) %>%
+  pull(why_not_using_r)
+```
+
+### Have you continued learning R through other courses and materials?
+
+```{r}
+table(dat$courses_materials)
+table(dat$courses_materials, dat$codeathon)
+```
+
+### Have you recommended DaSEH materials to others?
+
+```{r}
+table(dat$recommended)
+```
+
+### Have you returned to any DaSEH materials?
+
+```{r, echo = FALSE}
+dat %>%
+  select(returned) %>%
+  separate_longer_delim(returned, delim = ",") %>%
+  mutate(returned = str_trim(returned)) %>%
+  ggplot(aes(x = returned)) + 
+  geom_bar() + 
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  labs(x = "Materials returned to")
+```
+
+Out of the 27 respondents, 20 returned to slides, 19 returned to cheatsheets, 4 returned to videos, and 4 returned to no materials. 
+
+### DaSEH was an important part of my programming journey.
+
+```{r fig.height = 4, echo = FALSE}
+journey_likert <- dat %>%
+  mutate(across(part_of_journey, ~factor(.x, levels = c("strong_disagree", "disagree", "neutral",
+                                                     "agree", "strong_agree")))) %>%
+  tibble::as_tibble()
+journey_likert %>%
+  select(part_of_journey) %>%
+  gglikert(variable_labels = c(
+    part_of_journey = "DaSEH was an important part of my programming journey"
+    ),
+  labels_size = 2, y_label_wrap = 35) + 
+  theme(axis.text.y = element_text(size = 7))
+```
+
+There were 4 respondents who said "strongly disagree", that I wanted to look a little closer at.
+
+```{r, echo = FALSE}
+disagree <- dat %>%
+  filter(part_of_journey == "strong_disagree")
+disagree %>%
+  select(how_often_before, how_often_now)
+disagree %>%
+  select(codeathon)
+disagree %>% 
+  select(part_of_journey_text, impactful_text)
+```

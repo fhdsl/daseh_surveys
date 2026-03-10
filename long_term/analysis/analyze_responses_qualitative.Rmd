@@ -1,5 +1,5 @@
 ---
-title: "Explore DaSEH one year post survey responses"
+title: "Explore DaSEH one year post survey free responses"
 author: "Sarah Teichman"
 date: "`r Sys.Date()`"
 output: html_document
@@ -9,19 +9,18 @@ output: html_document
 library(surveydown)
 library(tidyverse)
 library(ggstats)
-library(ggalluvial)
 library(tidytext)
 library(wordcloud)
 ```
 
 First, load and clean data (filter on consent, check IP addresses and manually remove or merge duplicates, remove responses that are mostly `NA` or test).
 
-```{r, echo = TRUE, eval = TRUE, results = 'hide', message = FALSE, warning = FALSE}
+```{r, echo = FALSE, eval = TRUE, results = 'hide', message = FALSE, warning = FALSE}
 db <- sd_db_connect(gssencmode = "disable")
 dat <- sd_get_data(db) %>% filter(consent == "yes")
 ```
 
-```{r, echo = TRUE, eval = TRUE, results = 'hide', message = FALSE, warning = FALSE}
+```{r, echo = FALSE, eval = TRUE, results = 'hide', message = FALSE, warning = FALSE}
 length(unique(dat$ip_address)) # 27, 4 repeats
 table(as.numeric(as.factor(dat$ip_address)))
 which(as.numeric(as.factor(dat$ip_address)) == 2)
@@ -51,92 +50,13 @@ dat %>%
 
 We are left with  `r nrow(dat)` responses. 
 
-### How often did you use R before DaSEH? After? 
-
-```{r, fig.height = 4}
-using_R_likert <- dat %>%
-  mutate(across(c(how_often_before, how_often_now), 
-                ~factor(.x, levels = c("never", "few", "occasionally",
-                                       "weekly", "extensively"))))
-using_R_likert %>%
-  select(how_often_before, how_often_now) %>%
-  gglikert(variable_labels = c(
-    how_often_before = "Frequency of using R before DaSEH",
-    how_often_now = "Frequency of using R now"
-    ),
-  labels_size = 2, y_label_wrap = 35) + 
-  theme(axis.text.y = element_text(size = 7))
-```
-
-The "never" group disappears after DaSEH, the "few" group decreases, the "occasionally" group increases, the "few" group decreases, and the "extensively" group increases. I was curious from this plot how people were moving between these groups. 
-
-```{r, fig.height = 4, warning = FALSE}
-using_R_likert %>%
-  count(how_often_before, how_often_now, name = "count") %>%
-  ggplot(aes(axis1 = how_often_before, axis2 = how_often_now, y = count)) + 
-  geom_alluvium(aes(fill = how_often_before)) +
-  geom_stratum() +
-  geom_text(stat = "stratum", aes(label = after_stat(stratum))) +
-  scale_x_discrete(limits = c("Frequency of using R before DaSEH", 
-                              "Frequency of using R now")) +
-  theme_minimal()
-```
-
-From this plot, it seems like the people with the least R experience ("never" and "few") all moved to using R more often (most to "occasionally"), and the people with the most R experience before ("weekly" and "extensively") nearly all are "extensive" users now. I was also curious how this looks subset by people who did and didn't attend the codeathon. 
-
-```{r, fig.height = 4, warning = FALSE}
-using_R_likert %>%
-  count(how_often_before, how_often_now, codeathon, name = "count") %>%
-  ggplot(aes(axis1 = how_often_before, axis2 = how_often_now, y = count)) + 
-  geom_alluvium(aes(fill = codeathon)) +
-  geom_stratum() +
-  geom_text(stat = "stratum", aes(label = after_stat(stratum))) +
-  scale_x_discrete(limits = c("Frequency of using R before DaSEH", 
-                              "Frequency of using R now")) +
-  theme_minimal()
-```
-
-Coloring by codeathon attedance doesn't provide any particularly interesting insights. 
-
-Interestingly, there is a small subset of people whose use is decreasing. Let's look into that. 
-
-```{r}
-which(using_R_likert$how_often_before == "occasionally" & using_R_likert$how_often_now == "few")
-which(using_R_likert$how_often_before == "weekly" & using_R_likert$how_often_now == "occasionally")
-```
-
-One person who went "occasionally" to "few" started a new position that doesn't usually use R, but said they look forward to using R in the future. The second person who went from "occasionally" to "few" wanted to learn R in case they needed to teach it in a data science course, but the course is using different tools. The person who went from "weekly" to "occasionally" does not have a free response that explains this.
-
-### Did you participate in the code-a-thon at the Hutch?
-
-```{r}
-dat %>% count(codeathon)
-```
-
-### What do you use R for?
-
-```{r}
-r_use <- dat %>%
-  select(r_use_cases) %>%
-  separate_longer_delim(r_use_cases, delim = ",")
-
-r_use %>%
-  filter(!is.na(r_use_cases)) %>%
-  ggplot(aes(x = r_use_cases)) + 
-  geom_bar() + 
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) 
-```
-
-Data cleaning is the most common answer (all 24 participants who responded to this question included data cleaning), followed by data analysis (22) and visualization (21). The impact of learning data cleaning comes up in the free responses below as well. 
-
 ### What is the most important coding practice since DaSEH?
 
 From reading responses, things that came up in multiple responses are `tidyverse` skills, data wrangling, and GitHub. 
 
 Sentiment analysis is done below and a wordcloud is made, but with a small sample size I think reading through the responses is more informative. I don't find the sentiment analysis particularly insightful here because most of the negative words are either positive in a data science context (like wrangle) or used in a positive way (like someone saying that they learned to check for errors). The word cloud captures what I read in the free responses. 
 
-```{r}
+```{r, echo = FALSE}
 coding_text <- dat %>%
   select(session_id, coding_practices) %>%
   filter(!(is.na(coding_practices))) %>%
@@ -180,7 +100,7 @@ wordcloud(
 
 From reading responses, the topics that are repeated are project organization, using R markdown files, using notes/comments in code, and GitHub. Similarly, the sentiment analysis doesn't provide useful results but the word cloud detects similar concepts to what I read in the responses. 
 
-```{r}
+```{r, echo = FALSE}
 reprod_text <- dat %>%
   select(session_id, reproducibility_practices) %>%
   filter(!(is.na(reproducibility_practices))) %>%
@@ -216,78 +136,11 @@ wordcloud(
 )
 ```
 
-### Why aren't you using R? 
-
-```{r}
-table(is.na(dat$why_not_using_r))
-dat %>% 
-  filter(!is.na(why_not_using_r)) %>%
-  pull(why_not_using_r)
-```
-
-### Have you continued learning R through other courses and materials?
-
-```{r}
-table(dat$courses_materials)
-table(dat$courses_materials, dat$codeathon)
-```
-
-### Have you recommended DaSEH materials to others?
-
-```{r}
-table(dat$recommended)
-```
-
-### Have you returned to any DaSEH materials?
-
-```{r}
-dat %>%
-  select(returned) %>%
-  separate_longer_delim(returned, delim = ",") %>%
-  mutate(returned = str_trim(returned)) %>%
-  ggplot(aes(x = returned)) + 
-  geom_bar() + 
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
-  labs(x = "Materials returned to")
-```
-
-Out of the 27 respondents, 20 returned to slides, 19 returned to cheatsheets, 4 returned to videos, and 4 returned to no materials. 
-
-### DaSEH was an important part of my programming journey.
-
-```{r fig.height = 4}
-journey_likert <- dat %>%
-  mutate(across(part_of_journey, ~factor(.x, levels = c("strong_disagree", "disagree", "neutral",
-                                                     "agree", "strong_agree")))) %>%
-  tibble::as_tibble()
-journey_likert %>%
-  select(part_of_journey) %>%
-  gglikert(variable_labels = c(
-    part_of_journey = "DaSEH was an important part of my programming journey"
-    ),
-  labels_size = 2, y_label_wrap = 35) + 
-  theme(axis.text.y = element_text(size = 7))
-```
-
-There were 4 respondents who said "strongly disagree", that I wanted to look a little closer at.
-
-```{r}
-disagree <- dat %>%
-  filter(part_of_journey == "strong_disagree")
-disagree %>%
-  select(how_often_before, how_often_now)
-disagree %>%
-  select(codeathon)
-disagree %>% 
-  select(part_of_journey_text, impactful_text)
-```
-
 ### Free response about DaSEH and programming journey.
 
 Common topics in responses included returning to course materials, learning coding and R skills, workflows for data analysis, and understanding what tools exist. For this impact question, the sentiment analysis is more relevant. However, as before, the words that are classified as negative are used in a positive context. 
 
-```{r}
+```{r, echo = FALSE}
 journey_text <- dat %>%
   select(session_id, part_of_journey_text) %>%
   filter(!(is.na(part_of_journey_text))) %>%
@@ -347,7 +200,7 @@ wordcloud(
 
 Topics including R/coding, organizing projects, and data wrangling. Again, in the sentiment analysis the negative words are used in a positive context. The word cloud doesn't provide anything particularly interesting. 
 
-```{r}
+```{r, echo = FALSE}
 impact_text <- dat %>%
   select(session_id, impactful_text) %>%
   filter(!(is.na(impactful_text))) %>%
