@@ -49,7 +49,7 @@ dat %>%
 
 We are left with  `r nrow(dat)` responses. 
 
-### How often did you use R before DaSEH? After? 
+### How often did you use R before DaSEH? Now? 
 
 ```{r, echo = FALSE, fig.height = 4}
 using_R_likert <- dat %>%
@@ -66,75 +66,106 @@ using_R_likert %>%
   theme(axis.text.y = element_text(size = 7))
 ```
 
-The "never" group disappears after DaSEH, the "few" group decreases, the "occasionally" group increases, the "few" group decreases, and the "extensively" group increases. I was curious from this plot how people were moving between these groups. 
+Here we see that before DaSEH this group of participants was quite heterogeneous with how often they used R, with the largest groups of participants who never used R (22%) or occasionally used R (33%). Now, 88% of participants use R occasionally or more often, and the largest groups of participants use R occasionally (44%) or extensively (37%). 
 
 ```{r, echo = FALSE, fig.height = 4, warning = FALSE}
-using_R_likert %>%
-  count(how_often_before, how_often_now, name = "count") %>%
-  ggplot(aes(axis1 = how_often_before, axis2 = how_often_now, y = count)) + 
-  geom_alluvium(aes(fill = how_often_before)) +
-  geom_stratum() +
-  geom_text(stat = "stratum", aes(label = after_stat(stratum))) +
-  scale_x_discrete(limits = c("Frequency of using R before DaSEH", 
-                              "Frequency of using R now")) +
-  theme_minimal()
+likert_levels <- c("never", "few", "occasionally", "weekly", "extensively")
+likert_levels_before <- paste0(likert_levels, " (",
+                               using_R_likert %>% count(how_often_before) %>% pull(n),
+                               ")")
+likert_levels_now <- paste0(likert_levels, " (",
+                            using_R_likert %>% count(how_often_now) %>% pull(n) %>% c(0, .),
+                            ")")
+
+counts <- using_R_likert %>%
+  count(how_often_before, how_often_now, name = "n") %>%
+  mutate(
+    y_before = as.numeric(how_often_before),
+    y_now    = as.numeric(how_often_now)
+  )
+
+counts %>% 
+  ggplot(aes(x = 0, xend = 1, y = y_before, yend = y_now)) +
+  geom_segment(aes(linewidth = n, color = as.factor(y_before)), alpha = 0.7, lineend = "round") +
+  scale_x_continuous(
+    breaks = c(0, 1), 
+    labels = c("Frequency of using R\nbefore DaSEH", "Frequency of using R now")) +
+  scale_y_continuous(
+    breaks = seq_along(likert_levels), labels = likert_levels_before,
+    expand = expansion(add = 0.35),
+    sec.axis = dup_axis(
+      name   = NULL,
+      labels = likert_levels_now,
+      breaks = seq_along(likert_levels)
+    )
+  ) +
+  labs(x = NULL, y = NULL) +
+  theme_minimal(base_size = 12) +
+  theme(
+    panel.grid.minor = element_blank(),
+    panel.grid.major.x = element_blank()
+  ) + 
+  guides(color = "none", linewidth = "none")
 ```
 
-From this plot, it seems like the people with the least R experience ("never" and "few") all moved to using R more often (most to "occasionally"), and the people with the most R experience before ("weekly" and "extensively") nearly all are "extensive" users now. 
+From this plot, we can see that the participants with the least R experience ("never" and "few") all moved to using R more often (most to "occasionally"), and the participants with the most R experience before ("weekly" and "extensively") nearly all are "extensive" users now. The most variation in outcomes is from the participants who started off using R occasionally. 
 
-Interestingly, there is a small subset of people whose use is decreasing. Let's look into that. 
+Interestingly, there are three participants who use R less frequently now compared to before DaSEH. For the two participants that went from using R occasionally to few, this is explained in their free response answers to later questions (one person started a new position that doesn't usually use R but said they look forward to using R in the future, and the second person wanted to learn R to instruct a data science course but the course is using different tools). The participant who went from a weekly user to an occasional user does not have a free response that explains this change. 
 
-```{r, echo = FALSE}
-which(using_R_likert$how_often_before == "occasionally" & using_R_likert$how_often_now == "few")
-which(using_R_likert$how_often_before == "weekly" & using_R_likert$how_often_now == "occasionally")
+```{r, include = FALSE}
+dat %>% 
+  filter((how_often_before == "occasionally" & how_often_now == "few") |
+           (how_often_before == "weekly" & how_often_now == "occasionally")) %>%
+  select(contains("often"), contains("text"), -contains("time"))
 ```
-
-One person who went "occasionally" to "few" started a new position that doesn't usually use R, but said they look forward to using R in the future. The second person who went from "occasionally" to "few" wanted to learn R in case they needed to teach it in a data science course, but the course is using different tools. The person who went from "weekly" to "occasionally" does not have a free response that explains this.
 
 ### Did you participate in the code-a-thon at the Hutch?
 
-```{r}
+```{r, echo = FALSE}
 dat %>% count(codeathon)
 ```
 
 ### What do you use R for?
 
-```{r}
+```{r, echo = FALSE}
 r_use <- dat %>%
   select(r_use_cases) %>%
   separate_longer_delim(r_use_cases, delim = ",") %>%
-  mutate(r_use_cases = str_trim(r_use_cases))
+  mutate(r_use_cases = str_trim(r_use_cases) %>%
+           str_replace_all("_", " "))
 
 r_use %>%
   filter(!is.na(r_use_cases)) %>%
   ggplot(aes(x = r_use_cases)) + 
   geom_bar() + 
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+  labs(x = "R use cases", y = "Count")
+```
+
+```{r, include = FALSE}
+r_use %>% count(r_use_cases) %>% arrange(desc(n))
 ```
 
 Data cleaning is the most common answer (all 24 participants who responded to this question included data cleaning), followed by visualization (23) and data analysis (22). The impact of learning data cleaning comes up in the free responses below as well. 
 
 ### Why aren't you using R? 
 
-```{r}
-table(is.na(dat$why_not_using_r))
-dat %>% 
-  filter(!is.na(why_not_using_r)) %>%
-  pull(why_not_using_r)
+```{r, echo = FALSE}
+dat %>%
+  count(why_not_using_r)
 ```
 
 ### Have you continued learning R through other courses and materials?
 
-```{r}
-table(dat$courses_materials)
-table(dat$courses_materials, dat$codeathon)
+```{r, echo = FALSE}
+dat %>% count(courses_materials)
 ```
 
 ### Have you recommended DaSEH materials to others?
 
-```{r}
-table(dat$recommended)
+```{r, echo = FALSE}
+dat %>% count(recommended)
 ```
 
 ### Have you returned to any DaSEH materials?
@@ -157,8 +188,9 @@ Out of the 27 respondents, 20 returned to slides, 19 returned to cheatsheets, 4 
 
 ```{r fig.height = 4, echo = FALSE}
 journey_likert <- dat %>%
-  mutate(across(part_of_journey, ~factor(.x, levels = c("strong_disagree", "disagree", "neutral",
-                                                     "agree", "strong_agree")))) %>%
+  mutate(part_of_journey = str_replace_all(part_of_journey, "_", " ")) %>%
+  mutate(across(part_of_journey, ~factor(.x, levels = c("strong disagree", "disagree", "neutral",
+                                                     "agree", "strong agree")))) %>%
   tibble::as_tibble()
 journey_likert %>%
   select(part_of_journey) %>%
@@ -169,15 +201,11 @@ journey_likert %>%
   theme(axis.text.y = element_text(size = 7))
 ```
 
-There were 4 respondents who said "strongly disagree", that I wanted to look a little closer at.
+There were 4 respondents who said "strongly disagree". These are a subset of their responses to the other questions. 
 
 ```{r, echo = FALSE}
 disagree <- dat %>%
   filter(part_of_journey == "strong_disagree")
 disagree %>%
-  select(how_often_before, how_often_now)
-disagree %>%
-  select(codeathon)
-disagree %>% 
-  select(part_of_journey_text, impactful_text)
+  select(how_often_before, how_often_now, codeathon, r_use_cases, returned, why_not_using_r)
 ```
