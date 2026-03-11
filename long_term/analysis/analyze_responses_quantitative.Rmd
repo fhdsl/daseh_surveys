@@ -136,7 +136,7 @@ r_use <- dat %>%
 
 r_use %>%
   filter(!is.na(r_use_cases)) %>%
-  ggplot(aes(x = r_use_cases)) + 
+  ggplot(aes(x = fct_infreq(r_use_cases))) + 
   geom_bar() + 
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
