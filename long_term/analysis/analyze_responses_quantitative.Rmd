@@ -9,7 +9,6 @@ output: html_document
 library(surveydown)
 library(tidyverse)
 library(ggstats)
-library(ggalluvial)
 ```
 
 First, load and clean data (filter on consent, check IP addresses and manually remove or merge duplicates, remove responses that are mostly `NA` or test).
