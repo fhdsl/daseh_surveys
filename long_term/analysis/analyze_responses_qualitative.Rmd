@@ -1,0 +1,303 @@
+---
+title: "Explore DaSEH one year post survey free responses"
+author: "Sarah Teichman"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r, include = FALSE}
+library(surveydown)
+library(tidyverse)
+library(ggstats)
+library(tidytext)
+library(wordcloud)
+```
+
+First, load and clean data (filter on consent, check IP addresses and manually remove or merge duplicates, remove responses that are mostly `NA` or test).
+
+```{r, echo = FALSE, eval = TRUE, results = 'hide', message = FALSE, warning = FALSE}
+db <- sd_db_connect(gssencmode = "disable")
+dat <- sd_get_data(db) %>% filter(consent == "yes")
+```
+
+```{r, echo = FALSE, eval = TRUE, results = 'hide', message = FALSE, warning = FALSE}
+length(unique(dat$ip_address)) # 27, 4 repeats
+table(as.numeric(as.factor(dat$ip_address)))
+which(as.numeric(as.factor(dat$ip_address)) == 2)
+which(as.numeric(as.factor(dat$ip_address)) == 11)
+which(as.numeric(as.factor(dat$ip_address)) == 24)
+
+dat[c(20, 23, 24), ] # keep 20, drop 23 and 24 which are mostly NA
+dat[c(4, 13), ] # keep 4, drop 13 which is mostly NA
+dat[c(16, 19), ] # the same person, made it partway through in 16, then finished in 19, need to manually combine some text
+dat$coding_practices[19] <- dat$coding_practices[16]
+dat$reproducibility_practices[19] <- dat$reproducibility_practices[16]
+dat$part_of_journey_text[19] <- paste0(dat$part_of_journey_text[16], dat$part_of_journey_text[19])
+
+dat <- dat[-c(13, 16, 23, 24), ]
+
+"test" %in% as.matrix(dat) # check for "test" entries
+
+# check for mostly NA entries:
+dat %>% 
+  select(-contains("time"), -why_not_using_r) %>%
+  mutate(num_na = rowSums(is.na(across(everything())))) %>%
+  arrange(desc(num_na)) %>%
+  head(6)
+# the remaining entries with the most NAs are people who skipped the free responses, so keep these 
+# respondents in the analysis 
+```
+
+We are left with  `r nrow(dat)` responses. 
+
+### Free response analysis
+
+For each free response question, sentiment analysis is performed using AFINN and BING lexicons, and a wordcloud of the most common words is created. With such a small sample size, I think reading through the responses is more informative. I don't find the sentiment analysis particularly insightful here because most of the negative words are either neutral in a data science context (like wrangle) or used in a positive way (like someone saying that they learned to check for errors). The word clouds capture what I read in the free responses. 
+
+### What is the most important coding practice since DaSEH?
+
+From reading responses, things that came up in multiple responses are `tidyverse` skills, data wrangling, and GitHub. 
+
+Words used with positive or negative sentiments as categorized by the AFINN lexicon. 
+
+```{r, echo = FALSE}
+coding_text <- dat %>%
+  select(session_id, coding_practices) %>%
+  filter(!(is.na(coding_practices))) %>%
+  tibble::tibble()
+
+# remove stop words
+coding_words <- coding_text %>%
+  unnest_tokens(word, coding_practices) %>%
+  anti_join(stop_words, by = "word")
+
+# get senitment lexicons 
+bing <- get_sentiments("bing")
+afinn <- get_sentiments("afinn") 
+
+# sentiment analysis
+coding_words %>%
+  inner_join(afinn, by = "word") %>%
+  mutate(sentiment = case_when(value < 0 ~ "negative", value > 0 ~ "positive")) %>%
+  arrange(desc(value))
+```
+
+Words and their frequencies with positive or negative sentiments as categorized by the BING lexicon. 
+
+```{r, echo = FALSE}
+# top positive and negative words 
+coding_words %>%
+  inner_join(bing, by = "word") %>%
+  count(word, sentiment, sort = TRUE)
+```
+
+A word cloud with words that appeared three or more times. 
+
+```{r, echo = FALSE}
+# word cloud 
+word_freq <- coding_words %>%
+  count(word, sort = TRUE)
+
+wordcloud(
+  words = word_freq$word,
+  freq = word_freq$n,
+  max.words = 200,
+  scale = c(3.5, 0.7),
+  random.order = FALSE,
+  rot.per = 0.15,
+  colors = rep(c("#5ab4ac", "#d8b364"), length.out = 200)
+)
+```
+
+### What is the most important reproducibility practice you have adopted since DaSEH?
+
+From reading responses, the topics that are repeated are project organization, using R markdown files, using notes/comments in code, and GitHub. Similarly, the sentiment analysis doesn't provide useful results but the word cloud detects similar concepts to what I read in the responses. 
+
+Words used with positive or negative sentiments as categorized by the AFINN lexicon. 
+
+```{r, echo = FALSE}
+reprod_text <- dat %>%
+  select(session_id, reproducibility_practices) %>%
+  filter(!(is.na(reproducibility_practices))) %>%
+  tibble::tibble()
+
+# remove stop words
+reprod_words <- reprod_text %>%
+  unnest_tokens(word, reproducibility_practices) %>%
+  anti_join(stop_words, by = "word")
+
+# sentiment analysis
+reprod_words %>%
+  inner_join(afinn, by = "word") %>%
+  mutate(sentiment = case_when(value < 0 ~ "negative", value > 0 ~ "positive")) %>%
+  arrange(desc(value))
+```
+
+Words and their frequencies with positive or negative sentiments as categorized by the BING lexicon. 
+
+```{r, echo = FALSE}
+# top positive and negative words 
+reprod_words %>%
+  inner_join(bing, by = "word") %>%
+  count(word, sentiment, sort = TRUE)
+```
+
+A word cloud with words that appeared three or more times. 
+
+```{r, echo = FALSE}
+# word cloud 
+word_freq <- reprod_words %>%
+  count(word, sort = TRUE)
+
+wordcloud(
+  words = word_freq$word,
+  freq = word_freq$n,
+  max.words = 200,
+  scale = c(3.5, 0.7),
+  random.order = FALSE,
+  rot.per = 0.15,
+  colors = rep(c("#5ab4ac", "#d8b364"), length.out = 200)
+)
+```
+
+### Free response about DaSEH and programming journey.
+
+Common topics in responses included returning to course materials, learning coding and R skills, workflows for data analysis, and understanding what tools exist. For this impact question, the sentiment analysis is more relevant. However, as before, the words that are classified as negative are used in a positive context. 
+
+Words used with positive or negative sentiments as categorized by the AFINN lexicon, and a plot by participant (only including participants who used language classified as positive or negative). Note that when reading the text, the words classified as negative are used in a neutral or positive context. 
+
+```{r, echo = FALSE}
+journey_text <- dat %>%
+  select(session_id, part_of_journey_text) %>%
+  filter(!(is.na(part_of_journey_text))) %>%
+  tibble::tibble()
+
+# remove stop words
+journey_words <- journey_text %>%
+  unnest_tokens(word, part_of_journey_text) %>%
+  anti_join(stop_words, by = "word")
+
+# sentiment analysis
+afinn_sentiments <-
+  journey_words %>%
+  inner_join(afinn, by = "word") %>%
+  mutate(sentiment = case_when(value < 0 ~ "negative", value > 0 ~ "positive")) 
+afinn_sentiments %>%
+  filter(sentiment == "negative") %>%
+  arrange(desc(value))
+dat %>% 
+  filter(session_id %in% (afinn_sentiments %>% filter(sentiment == "negative") %>% pull(session_id))) %>%
+  pull(part_of_journey_text)
+
+p_afinn <-
+  ggplot(afinn_sentiments) +
+  geom_col(aes(x = as.factor(session_id), y = value, fill = sentiment), position = "stack") +
+  scale_fill_manual(values = c(
+    "positive" = "#5ab4ac",
+    "negative" = "#d8b364"
+  )) +
+  labs(y = "Affinity score", x = "Learner ID") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) 
+p_afinn
+```
+
+Words and their frequencies with positive or negative sentiments as categorized by the BING lexicon, only including words used more than once. 
+
+```{r, echo = FALSE}
+# top positive and negative words 
+journey_words %>%
+  inner_join(bing, by = "word") %>%
+  count(word, sentiment, sort = TRUE) %>%
+  filter(n > 1)
+```
+
+A word cloud with words that appeared three or more times. 
+
+```{r, echo = FALSE}
+# word cloud 
+word_freq <- journey_words %>%
+  mutate(word = ifelse(str_detect(word, "learn"), "learn", word)) %>%
+  count(word, sort = TRUE)
+
+wordcloud(
+  words = word_freq$word,
+  freq = word_freq$n,
+  max.words = 200,
+  scale = c(3.5, 0.7),
+  random.order = FALSE,
+  rot.per = 0.15,
+  colors = rep(c("#5ab4ac", "#d8b364"), length.out = 200)
+)
+```
+
+### Most impactful thing learned as part of DaSEH.
+
+Topics including R/coding, organizing projects, and data wrangling. Again, in the sentiment analysis the negative words are used in a positive context. The word cloud doesn't provide anything particularly interesting. 
+
+Words used with positive or negative sentiments as categorized by the AFINN lexicon, and a plot by participant (only including participants who used language classified as positive or negative). Note that again when reading the text, the words classified as negative are used in a neutral or positive context. 
+
+```{r, echo = FALSE}
+impact_text <- dat %>%
+  select(session_id, impactful_text) %>%
+  filter(!(is.na(impactful_text))) %>%
+  tibble::tibble()
+
+# remove stop words
+impact_words <- impact_text %>%
+  unnest_tokens(word, impactful_text) %>%
+  anti_join(stop_words, by = "word")
+
+# sentiment analysis
+afinn_sentiments <-
+  impact_words %>%
+  inner_join(afinn, by = "word") %>%
+  mutate(sentiment = case_when(value < 0 ~ "negative", value > 0 ~ "positive"))
+afinn_sentiments %>%
+  filter(sentiment == "negative") %>%
+  arrange(desc(value))
+dat %>% 
+  filter(session_id %in% (afinn_sentiments %>% filter(sentiment == "negative") %>% pull(session_id))) %>%
+  pull(impactful_text)
+
+p_afinn <-
+  ggplot(afinn_sentiments) +
+  geom_col(aes(x = as.factor(session_id), y = value, fill = sentiment), position = "stack") +
+  scale_fill_manual(values = c(
+    "positive" = "#5ab4ac",
+    "negative" = "#d8b364"
+  )) +
+  labs(y = "Affinity score", x = "Learner ID") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) 
+p_afinn
+```
+
+Words and their frequencies with positive or negative sentiments as categorized by the BING lexicon, only including words used more than once. 
+
+```{r, echo = FALSE}
+# top positive and negative words 
+impact_words %>%
+  inner_join(bing, by = "word") %>%
+  count(word, sentiment, sort = TRUE) %>%
+  filter(n > 1)
+```
+
+A word cloud with words that appeared three or more times. 
+
+```{r, echo = FALSE}
+# word cloud 
+word_freq <- impact_words %>%
+  mutate(word = ifelse(str_detect(word, "learn"), "learn", word)) %>%
+  count(word, sort = TRUE)
+
+wordcloud(
+  words = word_freq$word,
+  freq = word_freq$n,
+  max.words = 200,
+  scale = c(3.5, 0.7),
+  random.order = FALSE,
+  rot.per = 0.15,
+  colors = rep(c("#5ab4ac", "#d8b364"), length.out = 200)
+)
+```
