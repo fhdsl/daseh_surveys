@@ -37,10 +37,24 @@ ui <- sd_ui()
 
 server <- function(input, output, session) {
   # Define any conditional skip logic here (skip to page if a condition is true)
-  sd_skip_forward()
-  
+  # ── Conditional SKIP logic ─────────────────────────────────────────────────
   sd_skip_if(
-    input$consent == "no" ~ "screenout"
+    
+    # Consent screenout
+    input$consent1 == "no" ~ "screenout",
+    input$consent2 == "no" ~ "screenout",
+    
+    # Role-based branching
+    input$role == "educator"      ~ "end",
+    input$role == "student"      ~ "end",
+    input$role == "self_learner" ~ "end",
+    input$role == "other"        ~ "other_role_end"
+  )
+  
+  # ── Conditional SHOW logic ─────────────────────────────────────────────────
+  sd_show_if(
+    # Show "other" text fields only when "Other" is selected
+    input$role == "other"                                          ~ "role_other"
   )
 
   # Run surveydown server and define database
