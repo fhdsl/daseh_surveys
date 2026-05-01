@@ -1,0 +1,102 @@
+---
+# General Settings
+format: html
+echo: false
+warning: false
+
+# Theme Settings
+theme: default
+barposition: top
+footer-left: "Made with [surveydown](https://surveydown.org)"
+footer-right: '[<i class="bi bi-github"></i> Source Code](https://github.com/surveydown-dev/template_default)'
+
+# Survey Settings
+use-cookies: false
+auto-scroll: false
+rate-survey: false
+system-language: en
+highlight-unanswered: true
+highlight-color: blue
+capture-metadata: true
+all-questions-required: false
+required_questions:
+  - consent1
+  - consent2
+  - role
+---
+
+```{r}
+library(surveydown)
+```
+
+::: {.sd_page id=consentpage}
+
+# DaSEH Web Survey
+
+You cannot participate in this survey if you are under 18.
+
+```{r}
+sd_question(
+  type   = 'mc',
+  id     = 'consent1',
+  label  = "Are you 18 or over?",
+  option = c('Yes' = 'yes', 'No' = 'no')
+)
+```
+
+```{r}
+sd_question(
+  type = 'mc',
+  id = 'consent2',
+  label = "Do you consent to your responses being used for research purposes? Please see the description at the beginning of the survey for more information (use the back button within this survey if you wish to see it again).",
+  option = c('Yes' = 'yes', 'No'  = 'no')
+)
+sd_next()
+```
+:::
+
+::: {.sd_page id=role_page}
+
+```{r}
+sd_question(
+  type = 'mc',
+  id = 'role',
+  label = "How would you describe yourself (choose best option)? Note that you can say 'wish not to say' for the 'other' category.",
+  option = c(
+    "Educator - looking for data and education material to use in courses" = 'educator',
+    "Student - using DaSEH for a course or to help with a course" = 'student',
+    "Self-learner - interested in learning more about the skills, topics, and or concepts covered in DaSEH" = 'self_learner',
+    "Other" = 'other'
+  )
+)
+
+sd_question(
+  type = 'text',
+  id = 'role_other',
+  label = "If other, please specify:"
+)
+
+sd_next()
+```
+:::
+
+::: {.sd_page id=other_role_end}
+
+We want to know how we can create content to better serve your needs. Please get in touch with us at [daseh@fredhutch.org](mailto:daseh@fredhutch.org) if you would like to collaborate, are interested in creating DaSEH modules, have ideas, or would like to know more. Also check out our website at [daseh.org](https://daseh.org/).
+:::
+
+::: {.sd_page id=end}
+
+## Thank you for taking this survey!
+
+```{r}
+sd_close()
+```
+:::
+
+::: {.sd_page id=screenout}
+
+## Thank you for your interest!
+
+Unfortunately, you do not meet the eligibility requirements for this survey.
+:::
