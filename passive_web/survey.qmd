@@ -1,0 +1,74 @@
+---
+# General Settings
+format: html
+echo: false
+warning: false
+
+# Theme Settings
+theme: default
+barposition: top
+footer-left: "Made with [surveydown](https://surveydown.org)"
+footer-right: '[<i class="bi bi-github"></i> Source Code](https://github.com/surveydown-dev/template_default)'
+
+# Survey Settings
+use-cookies: false
+auto-scroll: false
+rate-survey: false
+system-language: en
+highlight-unanswered: true
+highlight-color: blue
+capture-metadata: true
+all-questions-required: false
+required_questions:
+  - consent'
+  - how_often_before
+  - how_often_now
+  - codeathon
+  - courses_materials
+  - recommended
+  - returned
+  - part_of_journey
+---
+
+```{r}
+library(surveydown)
+```
+
+::: {.sd_page id=welcome}
+
+# DaSEH Web Survey
+
+You cannot participate in this survey if you are under 18.
+
+```{r}
+sd_question(
+  type   = 'mc',
+  id     = 'consent',
+  label  = "Are you 18 or over?",
+  option = c(
+    'Yes' = 'yes', 
+    'No' = 'no'
+)
+)
+sd_next()
+```
+
+:::
+
+::: {.sd_page id=end}
+
+## Thank you for taking this survey!
+
+```{r}
+sd_close()
+```
+
+:::
+
+::: {.sd_page id=screenout}
+
+## Thank you for your interest!
+
+Unfortunately, you do not meet the eligibility requirements for this survey.
+
+:::
