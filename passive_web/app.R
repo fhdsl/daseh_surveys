@@ -45,7 +45,7 @@ server <- function(input, output, session) {
     input$consent2 == "no" ~ "screenout",
     
     # Role-based branching
-    input$role == "educator"      ~ "end",
+    input$role == "educator"     ~ "end",
     input$role == "student"      ~ "end",
     input$role == "self_learner" ~ "end",
     input$role == "other"        ~ "other_role_end"
