@@ -9,6 +9,7 @@ output: html_document
 library(surveydown)
 library(tidyverse)
 library(ggstats)
+library(viridis)
 ```
 
 First, load and clean data (filter on consent, check IP addresses and manually remove or merge duplicates, remove responses that are mostly `NA` or test).
@@ -88,7 +89,7 @@ counts %>%
   geom_segment(aes(linewidth = n, color = as.factor(y_before)), alpha = 0.7, lineend = "round") +
   scale_x_continuous(
     breaks = c(0, 1), 
-    labels = c("Frequency of using R\nbefore DaSEH", "Frequency of using R now")) +
+    labels = c("Frequency of using R\nbefore DaSEH", "Frequency of using R\none year after DaSEH")) +
   scale_y_continuous(
     breaks = seq_along(likert_levels), labels = likert_levels_before,
     expand = expansion(add = 0.35),
@@ -104,10 +105,27 @@ counts %>%
     panel.grid.minor = element_blank(),
     panel.grid.major.x = element_blank()
   ) + 
-  guides(color = "none", linewidth = "none")
+  guides(color = "none", linewidth = "none") + 
+  scale_color_viridis_d()
 ```
 
 From this plot, we can see that the participants with the least R experience ("never" and "few") all moved to using R more often (most to "occasionally"), and the participants with the most R experience before ("weekly" and "extensively") nearly all are "extensive" users now. The most variation in outcomes is from the participants who started off using R occasionally. 
+
+```{r, echo = FALSE}
+# proportion people the same or more now 
+counts %>%
+  mutate(more_now = ifelse(y_now >= y_before, n, 0)) %>%
+  summarise(sum(more_now) / sum(n))
+# proportion people more now (who weren't previously at extensively)
+counts %>%
+  filter(y_before < 5) %>% 
+  mutate(more_now = ifelse(y_now > y_before, n, 0)) %>%
+  summarise(sum(more_now) / sum(n))
+# proportion people more now
+counts %>%
+  mutate(more_now = ifelse(y_now > y_before, n, 0)) %>%
+  summarise(sum(more_now) / sum(n))
+```
 
 Interestingly, there are three participants who use R less frequently now compared to before DaSEH. For the two participants that went from using R occasionally to few, this is explained in their free response answers to later questions (one person started a new position that doesn't usually use R but said they look forward to using R in the future, and the second person wanted to learn R to instruct a data science course but the course is using different tools). The participant who went from a weekly user to an occasional user does not have a free response that explains this change. 
 
