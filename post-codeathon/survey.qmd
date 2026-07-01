@@ -116,16 +116,6 @@ sd_question(
 Here we are asking about your experience following the Code-a-thon.
 
 ```{r}
-# TODO: add rest of questions
-```
-
---- page3
-
-# Post-Code-a-thon Knowledge
-
-Here we are asking about your experience following the Code-a-thon.
-
-```{r}
 sd_question(
   type = "matrix",
   id = "comfort_data_science",
