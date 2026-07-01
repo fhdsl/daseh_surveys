@@ -110,6 +110,241 @@ sd_question(
 ```
 
 
+--- page3
+
+# Post-Code-a-thon Knowledge
+
+Here we are asking about your experience following the Code-a-thon.
+
+```{r}
+sd_question(
+  type = "matrix",
+  id = "comfort_data_science",
+  label = "Now that you have participated in the Code-a-thon, how would you rate your current comfort with data science, generally?",
+  row    = c(" " = "comfort_data_science_q"),
+  option = c(
+    "1 (Less comfortable)" = "1",
+    "2" = "2",
+    "3" = "3",
+    "4" = "4", 
+    "5 (More comfortable)" = "5"
+  )
+)
+
+sd_question(
+  type = "matrix",
+  id = "comfort_data_tools",
+  label = "Now that you have participated in the Code-a-thon, how confident are you in your ability to use data science tools (e.g., R programming, GitHub) to answer Environmental Health related questions?",
+  row    = c(" " = "comfort_data_tools_q"),
+  option = c(
+    "1 (Less comfortable)" = "1",
+    "2" = "2",
+    "3" = "3",
+    "4" = "4", 
+    "5 (More comfortable)" = "5"
+  )
+)
+
+sd_question(
+  type = "matrix",
+  id = "skills",
+  label = "Please rate how you feel your skills have improved as a result of the Code-a-thon.",
+  row    = c(" " = "skills_q"),
+  option = c(
+    "1 (Less comfortable)" = "1",
+    "2" = "2",
+    "3" = "3",
+    "4" = "4", 
+    "5 (More comfortable)" = "5"
+  )
+)
+
+sd_question(
+  type = "matrix",
+  id = "topics",
+  label = "Now that you have participated in the Code-a-thon, how would you rate your current confidence with these specific tools or topics?",
+  row    = c("Rmarkdown / Reproducible documents" = "Rmd",
+             "RStudio" = "RStudio",
+             "Basic R Syntax" = "R_syntax",
+             "Importing or loading data" = "data_import",
+             "Subsetting datasets" = "subsetting",
+             "Summarizing datasets" = "summarizing",
+             "Data classes" = "data_classes",
+             "Cleaning datasets" = "data_cleaning",
+             "Reshaping or combining datasets" = "data_reshape",
+             "Data visualization" = "data_viz",
+             "Statistics / modeling" = "statistics", 
+             "Functional programming" = "functional_programming",
+             "GitHut / version control" = "github"),
+  option = c(
+    "1 (Less comfortable)" = "1",
+    "2" = "2",
+    "3" = "3",
+    "4" = "4", 
+    "5 (More comfortable)" = "5"
+  )
+)
+
+sd_question(
+  type = "matrix",
+  id = "codeathon_R_skills",
+  label = "The Code-a-thon helped me recall and apply my R skills",
+  row    = c(" " = "codeathon_R_skills_q"),
+  option = c(
+    "Strongly Disagree" = "strong_disagree",
+    "Disagree" = "disagree",
+    "Neutral" = "neutral",
+    "Agree" = "agree", 
+    "Strongly Agree" = "strong_agree"
+  )
+)
+
+sd_question(
+  type = "matrix",
+  id = "codeathon_skills_new_ways",
+  label = "The Code-a-thon challenged me to use skills from the online course in new ways.",
+  row    = c(" " = "codeathon_skills_new_ways_q"),
+  option = c(
+    "Strongly Disagree" = "strong_disagree",
+    "Disagree" = "disagree",
+    "Neutral" = "neutral",
+    "Agree" = "agree", 
+    "Strongly Agree" = "strong_agree"
+  )
+)
+
+sd_question(
+  type = "matrix",
+  id = "codeathon_learned_more",
+  label = "I learned more because of the Code-a-thon than I would have from the online course alone",
+  row    = c(" " = "codeathon_learned_more_q"),
+  option = c(
+    "Strongly Disagree" = "strong_disagree",
+    "Disagree" = "disagree",
+    "Neutral" = "neutral",
+    "Agree" = "agree", 
+    "Strongly Agree" = "strong_agree"
+  )
+)
+```
+
+--- page4
+
+# Data Skills
+
+Here we will ask you some questions about data.
+
+```{r}
+sd_question(
+  type   = "textarea",
+  id     = "changes_to_viz",
+  label  = "Now that you have participated in the Code-a-thon, what changes, if any, would you make to this dataset in order to do analysis or make a visualization?\n\nPlease provide a brief answer of 1-2 sentences."
+)
+
+sd_question(
+  type   = "textarea",
+  id     = "reproducibility_practices",
+  label  = "Now that you have participated in the Code-a-thon, in your own words, describe practices you might use to make your work more transparent and reproducible in R.\n\nPlease provide a brief answer of 1-2 sentences."
+)
+
+sd_question(
+  type   = "textarea",
+  id     = "dataset_investigation_practices",
+  label  = "Now that you have participated in the Code-a-thon, in your own words, describe a process you would typically take when investigating a new dataset.\n\nPlease provide a brief answer of 1-2 sentences."
+)
+```
+
+--- ai
+
+# AI and DaSEH
+
+Your responses will be treated neutrally and will not affect future opportunities with DaSEH.
+
+```{r}
+sd_question(
+  type = "matrix",
+  id = "ai_chatbot_in_codeathon",
+  label = "How much did you use AI chatbots (e.g., ChatGPT, Claude, CoPilot) during the Code-a-thon?",
+  row    = c(" " = "ai_chatbot_in_codeathon_q"),
+  option = c(
+    "1 (Never)" = "1",
+    "2" = "2",
+    "3" = "3",
+    "4" = "4", 
+    "5 (Extensively)" = "5"
+  )
+)
+
+sd_question(
+  type = "matrix",
+  id = "chatbot_supplemented_learning",
+  label = "I found that AI chatbots supplemented my learning during the Code-a-thon.",
+  row    = c(" " = "chatbot_supplemented_learning_q"),
+  option = c(
+    "Strongly Disagree" = "strong_disagree",
+    "Disagree" = "disagree",
+    "Neutral" = "neutral",
+    "Agree" = "agree", 
+    "Strongly Agree" = "strong_agree"
+  )
+)
+
+sd_question(
+  type = "matrix",
+  id = "stronger_skills_than_bot",
+  label = "I developed stronger skills through the Code-a-thon than I would have using AI chatbots alone.",
+  row    = c(" " = "stronger_skills_than_bot_q"),
+  option = c(
+    "Strongly Disagree" = "strong_disagree",
+    "Disagree" = "disagree",
+    "Neutral" = "neutral",
+    "Agree" = "agree", 
+    "Strongly Agree" = "strong_agree"
+  )
+)
+
+sd_question(
+  type = "matrix",
+  id = "deeper_understanding_than_bot",
+  label = "I developed deeper understanding through the Code-a-thon than I would have using AI chatbots alone.",
+  row    = c(" " = "deeper_understanding_than_bot_q"),
+  option = c(
+    "Strongly Disagree" = "strong_disagree",
+    "Disagree" = "disagree",
+    "Neutral" = "neutral",
+    "Agree" = "agree", 
+    "Strongly Agree" = "strong_agree"
+  )
+)
+
+sd_question(
+  type   = "textarea",
+  id     = "ai_long_response",
+  label  = "(OPTIONAL) Feel free to explain or describe any responses above."
+)
+```
+
+--- open_feedback
+
+# Open Feedback
+
+Please provide your thoughts below.
+
+```{r}
+sd_question(
+  type   = "textarea",
+  id     = "suggestions",
+  label  = "Please provide any suggestions regarding the Code-a-thon modality. This could be logistics, timing, projects, topics covered, standups, code review, lightning talks, etc."
+)
+
+sd_question(
+  type   = "textarea",
+  id     = "feedback",
+  label  = "Please provide any feedback that you think could help us improve the DaSEH Code-a-thon. You can provide anonymous feedback
+here: https://forms.gle/hQ7jdHZSZoDpHAdE6."
+)
+```
+
 --- end
 
 ## Thank you for taking this survey!
