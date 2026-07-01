@@ -250,7 +250,13 @@ sd_question(
   id     = "changes_to_viz",
   label  = "Now that you have participated in the Code-a-thon, what changes, if any, would you make to this dataset in order to do analysis or make a visualization?\n\nPlease provide a brief answer of 1-2 sentences."
 )
+```
 
+```{r, fig.cap="Data to analyze"}
+knitr::include_graphics("mortality.png")
+```
+
+```{r}
 sd_question(
   type   = "textarea",
   id     = "reproducibility_practices",
