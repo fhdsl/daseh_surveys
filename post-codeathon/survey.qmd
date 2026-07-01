@@ -27,6 +27,17 @@ survey-settings:
     - consent2
     - first_name
     - last_name
+    - comfort_data_science
+    - comfort_data_skills
+    - skills
+    - topics
+    - codeathon_R_skills
+    - codeathon_skills_new_ways
+    - codeathon_learned_more
+    - ai_chatbot_in_codeathon
+    - chatbot_supplemented_learning
+    - stronger_skills_than_bot
+    - deeper_understanding_than_bot
 
 # Use this section to customize system messages
 system-messages:
