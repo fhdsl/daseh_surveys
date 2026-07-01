@@ -1,0 +1,5 @@
+.env
+analysis/*.html
+../.DS_Store
+.Rproj
+*.Rproj
