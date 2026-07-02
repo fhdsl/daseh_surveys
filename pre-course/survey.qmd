@@ -235,7 +235,7 @@ sd_question(
 sd_question(
   type = "matrix",
   id = "comfort_data_science",
-  label = "How would you rate your current comfort with data science, generally?",
+  label = "**How would you rate your current comfort with data science, generally?**",
   row    = c(" " = "comfort_data_science_q"),
   option = c(
     "1 (Less comfortable)" = "1",
@@ -249,7 +249,7 @@ sd_question(
 sd_question(
   type = "matrix",
   id = "comfort_data_tools",
-  label = "How confident are you in your ability to use data science tools (e.g., R programming, GitHub) to answer Environmental Health related questions?",
+  label = "**How confident are you in your ability to use data science tools (e.g., R programming, GitHub) to answer Environmental Health related questions?**",
   row    = c(" " = "comfort_data_tools_q"),
   option = c(
     "1 (Less comfortable)" = "1",
