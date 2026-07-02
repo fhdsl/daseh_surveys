@@ -77,6 +77,7 @@ Address: Fred Hutch Cancer Center Institutional Review Office
 1100 Fairview Ave. N. Mail Stop J2-100, Seattle, WA 98109
 Telephone: 206-667-5900
 E-mail: iro@fredhutch.org
+<br>
 
 ```{r}
 sd_question(
@@ -252,7 +253,7 @@ sd_question(
   label = "**How confident are you in your ability to use data science tools (e.g., R programming, GitHub) to answer Environmental Health related questions?**",
   row    = c(" " = "comfort_data_tools_q"),
   option = c(
-    "1 (Less comfortable)" = "1",
+    "1 (Less confident)" = "1",
     "2" = "2",
     "3" = "3",
     "4" = "4", 
