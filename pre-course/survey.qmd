@@ -1,0 +1,388 @@
+---
+# The YAML header specifies several settings for the survey but is not required.
+# A full list of settings can be found under _survey/settings.yml directory.
+
+# Use this section to customize theme, progress bar, and footers
+theme-settings:
+  theme: default
+  barposition: top
+  footer-left: "Made with [surveydown](https://surveydown.org)"
+  footer-right: '[<i class="bi bi-github"></i> Source Code](https://github.com/surveydown-dev/template_default)'
+
+# Use this section to customize survey behavior and appearance
+survey-settings:
+  mode: preview
+  show-previous: true
+  use-cookies: false
+  auto-scroll: false
+  rate-survey: false
+  system-language: en
+  highlight-unanswered: true
+  highlight-color: blue
+  capture-metadata: true
+  all-required: false
+  all-shuffled: false
+  required: 
+    - consent1
+    - consent2
+    - first_name
+    - last_name
+    - pre_course_R
+    - experience_with_tools
+    - comfort_data_science
+    - comfort_data_skills
+    - topics
+
+# Use this section to customize system messages
+system-messages:
+  warning: Warning
+  previous: Previous
+  next: Next
+  exit: Finish
+---
+
+```{r}
+library(surveydown)
+```
+
+--- welcome
+
+# Data Science for Environmental Health (DaSEH) Pre-course Survey
+
+Thank you for taking the time to participate in this survey. We are collecting data about user experience with our course to learn more about how to improve the data science education experience. This data may ultimately be used for a research publication and reporting to the NIH.
+
+**DATA CONFIDENTIALITY:** We will collect your name in order to track your progress through the course. We will also ask optional demographic information. The potential risks to you are small. The potential benefits to the community of data scientists, developers, and professors are very high – we will be able to learn how we can improve data science/environmental health education material.
+
+**DATA SHARING:** We plan to release the data collected from this survey only in aggregate form using GitHub (<https://github.com/>). No personally identifiable information (such as your name or response timestamp) will be shared.
+
+**PARTICIPATION:** You must be 18 or over to participate. You will be asked a series of questions about you, your institution type, your prior experience, and your expectations for the course. You can stop participating in the survey at any point. You do not need to answer optional questions. Only answers that are submitted by clicking the submit button at the end of the survey will be recorded. Depending on how you answer the survey, this will take ~10 minutes to complete. You will have an opportunity before submission to edit your responses. Any answers that are ultimately submitted (and not removed by the participant) will continue to be used for research.
+
+General information about traffic to the case study websites and our main website (<https://daseh.org/>) is being tracked by Google Analytics (<https://analytics.google.com>). This provides us with summary information such as the number of visitors from different countries. We will not use this to try to identify who has submitted a survey response.
+
+**RISK:** Risk of participation is minimal. The questions we ask pose minimal security risk to participants as they focus on your personal experience and expectations. Demographic questions are optional. While we have taken measures to ensure the security of the survey responses, please be aware that no online system is completely secure. By participating in this survey, you understand and accept the inherent risks associated with transmitting information over the internet.
+
+**CONSENT:** The first questions will ask about your age and if you consent (or agree) that the data from your responses be used for research purposes.
+
+**QUESTIONS OR PROBLEMS:** If you have questions or problems, email Ava Hoffman at <ahoffma2@fredhutch.org> or contact us through the anonymous [Code of Conduct Reporting Form](https://forms.gle/WBymAnzfWYpfWk4b6).
+
+You may also contact the Fred Hutchinson Cancer Center IRB Office if you have questions about your rights as a participant. Contact the IRB if you feel you have not been treated fairly or if you have other concerns.
+
+This study has been deemed exempt by the Fred Hutchinson Cancer Center IRB, specifically Exempt status (Category (2)(ii) Tests, surveys, interviews, or observation (low risk)). Thus, the proposed activity does not qualify as human subjects research as defined by DHHS regulations 45 CFR 46.102, and does not require IRB oversight.
+
+IRB No.: FHIRB0020064  
+Date Approved: 3/19/2024  
+
+The IRB contact information is:
+Address: Fred Hutch Cancer Center Institutional Review Office
+1100 Fairview Ave. N. Mail Stop J2-100, Seattle, WA 98109
+Telephone: 206-667-5900
+E-mail: iro@fredhutch.org
+
+```{r}
+sd_question(
+  type   = 'mc',
+  id     = 'consent1',
+  label  = "**Are you 18 or over?**\n\nYou cannot participate in this survey if you are under 18.",
+  option = c('Yes' = 'yes', 'No' = 'no') # See app.R for conditional skip logic
+)
+
+sd_question(
+  type   = "mc",
+  id     = "consent2",
+  label  = "**Do you consent to your responses being used for research purposes?**\n\nPlease see the description at the beginning of the survey for more information. Use the back button within this survey if you wish to see it again.",
+  option = c("Yes" = "yes", "No" = "no") # See app.R for conditional skip logic
+)
+```
+
+--- page2
+
+# General Information
+
+Here we are asking general information about you.
+
+```{r}
+sd_question(
+  type  = "text",
+  id    = "first_name",
+  label = "**First or Given Name:**\n\nThis will only be used to match any of your survey responses through time."
+)
+
+sd_question(
+  type  = "text",
+  id    = "last_name",
+  label = "**Last or Family Name:**\n\nThis will only be used to match any of your survey responses through time."
+)
+```
+
+--- institution
+
+# Institution information 
+
+Here we are asking about your institution. 
+
+```{r}
+sd_question(
+  type  = "mc",
+  id    = "role",
+  label = "**Which best describes your current role?**",
+  option = c(
+    "Student" = "student",
+    "Postdoctoral Researcher" = "postdoc",
+    "Faculty / Instructor" = "faculty",
+    "Professional in Government or Industry" = "professional",
+    "Other" = "other"
+  )
+)
+
+sd_question(
+  type  = "text",
+  id    = "role_other",
+  label = "Please specify:"
+)
+
+sd_question(
+  type  = "mc",
+  id    = "academic_institution",
+  label = '**Do you work or study at an academic institution**\n\nAn academic institution typically grants academic degrees. Please select "Yes" if you are a student, or work more than 50% of the time at an academic institution.',
+  option = c(
+    "Yes" = "yes",
+    "No" = "no"
+  )
+)
+
+sd_question(
+  type  = "mc_multiple",
+  id    = "academic_institution_more",
+  label = '**Which of the following describe your institution**\n\nSelect any that apply. You may also use the "Other" option to describe.\n\nIf you are not sure, you can look up your research institution status [here](https://carnegieclassifications.acenet.edu/institutions/?&target=_blank). You can look up minority-serving status [here](https://msiexchange.nasa.gov/pdf/2023-2024%20MSI%20List.pdf?&target=_blank).',
+  option = c(
+    "Doctoral Universities -- Very high research activity ('R1')" = "R1",
+    "Doctoral Universities -- High research activity ('R2')" = "R2",
+    "Master's College or University" = "masters",
+    "Primarily Undergraduate Institution (PUI)" = "pui",
+    "Community College" = "cc",
+    "Historically Black College or University (HBCU)" = "hbcu",
+    "Hispanic Serving Institution (HSI)" = "hsi",
+    "Tribal College or University (TCU)" = "tcu",
+    "Native American-Serving, Nontribal Institutions (NASNTI)" = "nasnti",
+    "Asian American and Native American Pacific Islander-Serving Institution (AANAPISI)" = "aanapisi",
+    "Other under-resourced institution" = "other_under_resource",
+    "Not sure" = "not_sure",
+    "Other" = "other"
+  )
+)
+
+sd_question(
+  type  = "text",
+  id    = "academic_institution_more_other",
+  label = "Please specify:"
+)
+
+sd_question(
+  type  = "mc_multiple",
+  id    = "organization",
+  label = '**Which of the following describe your institution?**\n\nSelect any that apply. You may also use the "Other" option to describe.',
+  option = c(
+    "Government - Local" = "local_govt",
+    "Government - State" = "state_govt",
+    "Government - Federal" = "federal_govt",
+    "Research Center" = "research_center",
+    "Not-for-profit Organization" = "npo",
+    "For-profit Organization" = "for_profit",
+    "Not sure" = "not_sure",
+    "Other" = "other"
+  )
+)
+
+sd_question(
+  type  = "text",
+  id    = "organization_other",
+  label = "Please specify:"
+)
+```
+
+--- prior_knowledge
+
+# Prior Knowledge
+
+Here we are asking about your prior and current experience.
+
+```{r}
+sd_question(
+  type  = "mc",
+  id    = "pre_course_R",
+  label = '**Which of the following describes your pre-course experience with R?**',
+  option = c(
+    "I have no experience with R" = "none",
+    "I have tried R, but am not experienced" = "tried",
+    "I use R occasionally" = "occasional",
+    "I use R almost daily" = "daily"
+  )
+)
+
+sd_question(
+  type  = "mc_multiple",
+  id    = "experience_with_tools",
+  label = '**Which of the following do you have experience with?**\n\nSelect all that apply.',
+  option = c(
+    "Excel and/or Google sheets" = "sheets",
+    "Git/GitHub for version control" = "git",
+    "Statistical tools (e.g., SAS, Stata, etc.)" = "stat_tools",
+    "Other programming language(s), besides R (e.g., C, C++, Java, JavaScript, Python, Julia, etc.)" = "other_programming",
+    "None of these" = "none"
+  )
+)
+
+sd_question(
+  type = "matrix",
+  id = "comfort_data_science",
+  label = "How would you rate your current comfort with data science, generally?",
+  row    = c(" " = "comfort_data_science_q"),
+  option = c(
+    "1 (Less comfortable)" = "1",
+    "2" = "2",
+    "3" = "3",
+    "4" = "4", 
+    "5 (More comfortable)" = "5"
+  )
+)
+
+sd_question(
+  type = "matrix",
+  id = "comfort_data_tools",
+  label = "How confident are you in your ability to use data science tools (e.g., R programming, GitHub) to answer Environmental Health related questions?",
+  row    = c(" " = "comfort_data_tools_q"),
+  option = c(
+    "1 (Less comfortable)" = "1",
+    "2" = "2",
+    "3" = "3",
+    "4" = "4", 
+    "5 (More comfortable)" = "5"
+  )
+)
+
+sd_question(
+  type = "matrix",
+  id = "topics",
+  label = "**How would you rate your current confidence with these specific tools or topics?**\n\nMark one circle per row.",
+  row    = c("Rmarkdown / Reproducible documents" = "Rmd",
+             "RStudio" = "RStudio",
+             "Basic R Syntax" = "R_syntax",
+             "Importing or loading data" = "data_import",
+             "Subsetting datasets" = "subsetting",
+             "Summarizing datasets" = "summarizing",
+             "Data classes" = "data_classes",
+             "Cleaning datasets" = "data_cleaning",
+             "Reshaping or combining datasets" = "data_reshape",
+             "Data visualization" = "data_viz",
+             "Statistics / modeling" = "statistics", 
+             "Functional programming" = "functional_programming",
+             "GitHub / version control" = "github"),
+  option = c(
+    "1 (Less comfortable)" = "1",
+    "2" = "2",
+    "3" = "3",
+    "4" = "4", 
+    "5 (More comfortable)" = "5"
+  )
+)
+```
+
+--- prior_skills
+
+# Prior Skills
+
+Here we will ask you some questions about data.
+
+```{r}
+sd_question(
+  type   = "textarea",
+  id     = "changes_to_viz",
+  label  = "**What changes, if any, would you make to this dataset in order to do analysis or make a visualization?**\n\nPlease provide a brief answer of 1-2 sentences."
+)
+```
+
+```{r, fig.alt="Data to analyze"}
+knitr::include_graphics("../images/mortality.png")
+```
+
+```{r}
+sd_question(
+  type   = "textarea",
+  id     = "reproducibility_practices",
+  label  = "**In your own words, describe practices you might use to make your work more transparent and reproducible in R.**\n\nPlease provide a brief answer of 1-2 sentences."
+)
+
+sd_question(
+  type   = "textarea",
+  id     = "dataset_investigation_practices",
+  label  = "**In your own words, describe a process you would typically take when investigating a new dataset.**\n\nPlease provide a brief answer of 1-2 sentences."
+)
+```
+
+--- expectations
+
+# Expectations
+
+Here we will collect information on your expectations for the course.
+
+```{r}
+sd_question(
+  type = "mc_multiple",
+  id = "concerns",
+  label = "**What are your concerns about this course?**\n\nSelect any that apply. You may also use the 'Other' option to describe.",
+  option = c(
+    "The technical nature of the material" = "technical",
+    "My ability to keep up with the pace of the course" = "course_pace",
+    "My lack of experience with data science or R programming" = "lack_experience",
+    "The time commitment required for the course" = "time_commitment",
+    "Other" = "other"
+  )
+)
+
+sd_question(
+  type = "text",
+  id = "concerns_other",
+  label = "Please specify:"
+)
+
+sd_question(
+  type = "mc_multiple",
+  id = "benefits",
+  label = "**How do you think learning R and more about data science will benefit your studies/career?**\n\nSelect any that apply. You may also use the 'Other' option to describe.",
+  option = c(
+    "Improve data analysis skills" = "data_analysis",
+    "Enhance career prospects and competitiveness" = "career_prospects",
+    "Improve collaboration and reproducibility in research" = "collaboration",
+    "Support decision-making in environmental health policies" = "envt_health_decisions",
+    "Enable more efficient and effective data visualization" = "data_viz",
+    "Support statistical and modeling applications" = "stat_modeling_application",
+    "Automate repetitive tasks in data processing" = "automate_data_processing",
+    "Improve ability to handle large datasets" = "handle_large_data",
+    "Enhance ability to create custom analytical tools" = "custom_tools",
+    "Improve ability to teach others" = "teach_others",
+    "Other" = "other"
+  )
+)
+
+sd_question(
+  type = "text",
+  id = "benefits_other",
+  label = "Please specify:"
+)
+```
+
+--- end
+
+## Thank you for taking this survey!
+
+Click "Finish" to submit.
+
+```{r}
+sd_close()
+```
+
+--- screenout
+
+## Thank you for your interest!
+
+Unfortunately, you do not meet the eligibility requirements for this survey.
