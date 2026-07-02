@@ -109,6 +109,7 @@ sd_question(
 # General Information
 
 Here we are asking general information about you.
+<br>
 
 ```{r}
 sd_question(
@@ -129,6 +130,7 @@ sd_question(
 # Post-Online Course Knowledge
 
 Here we are asking about your experience following the online course.
+<br>
 
 ```{r}
 sd_question(
@@ -242,6 +244,7 @@ sd_question(
 # Prior Skills
 
 Here we will ask you some questions about data.
+<br>
 
 ```{r}
 sd_question(
@@ -272,6 +275,7 @@ sd_question(
 --- ai
 
 # AI and DaSEH
+<br>
 
 Your responses will be treated neutrally and will not affect future opportunities with DaSEH.
 
@@ -344,6 +348,7 @@ sd_question(
 # Open Feedback
 
 Please provide your thoughts below.
+<br>
 
 ```{r}
 sd_question(
@@ -364,6 +369,7 @@ sd_question(
 ## Thank you for taking this survey!
 
 Click "Finish" to submit.
+<br>
 
 ```{r}
 sd_close()

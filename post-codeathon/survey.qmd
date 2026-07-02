@@ -110,6 +110,7 @@ sd_question(
 # General Information
 
 Here we are asking general information about you.
+<br>
 
 ```{r}
 sd_question(
@@ -130,6 +131,7 @@ sd_question(
 # Post-Code-a-thon Knowledge
 
 Here we are asking about your experience following the Code-a-thon.
+<br>
 
 ```{r}
 sd_question(
@@ -248,6 +250,7 @@ sd_question(
 # Data Skills
 
 Here we will ask you some questions about data.
+<br>
 
 ```{r}
 sd_question(
@@ -280,6 +283,7 @@ sd_question(
 # AI and DaSEH
 
 Your responses will be treated neutrally and will not affect future opportunities with DaSEH.
+<br>
 
 ```{r}
 sd_question(
@@ -350,6 +354,7 @@ sd_question(
 # Open Feedback
 
 Please provide your thoughts below.
+<br>
 
 ```{r}
 sd_question(
@@ -371,6 +376,7 @@ here: https://forms.gle/hQ7jdHZSZoDpHAdE6."
 ## Thank you for taking this survey!
 
 Click "Finish" to submit.
+<br>
 
 ```{r}
 sd_close()
