@@ -253,7 +253,7 @@ sd_question(
 ```
 
 ```{r, fig.alt="Data to analyze"}
-knitr::include_graphics("../images/mortality.png")
+knitr::include_graphics("img/mortality.png")
 ```
 
 ```{r}
