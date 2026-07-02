@@ -303,7 +303,7 @@ sd_question(
 ```
 
 ```{r, fig.alt="Data to analyze"}
-knitr::include_graphics("../images/mortality.png")
+knitr::include_graphics("img/mortality.png")
 ```
 
 ```{r}
@@ -336,6 +336,7 @@ sd_question(
     "My ability to keep up with the pace of the course" = "course_pace",
     "My lack of experience with data science or R programming" = "lack_experience",
     "The time commitment required for the course" = "time_commitment",
+    "None of these" = "none",
     "Other" = "other"
   )
 )
