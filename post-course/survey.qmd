@@ -204,7 +204,7 @@ sd_question(
 sd_question(
   type = "mc_multiple",
   id = "interact_material",
-  label = "**How did you interact with the online course material?**\n\nSelect all that apply.",
+  label = "**How did you interact with the online course material?**\n\nSelect all that apply. You may also use the 'Other' option, and use the optional comment box to explain further.",
   option = c(
     "Synchronously (attended set class times with the instructors)" = "synchronous",
     "Asynchronously (watched recordings)" = "asynchronous",
