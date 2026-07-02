@@ -73,9 +73,13 @@ IRB No.: FHIRB0020064
 Date Approved: 3/19/2024  
 
 The IRB contact information is:
+<br>
 Address: Fred Hutch Cancer Center Institutional Review Office
+<br>
 1100 Fairview Ave. N. Mail Stop J2-100, Seattle, WA 98109
+<br>
 Telephone: 206-667-5900
+<br>
 E-mail: iro@fredhutch.org
 <br>
 
@@ -100,6 +104,7 @@ sd_question(
 # General Information
 
 Here we are asking general information about you.
+<br>
 
 ```{r}
 sd_question(
@@ -139,6 +144,7 @@ sd_question(
 # Institution information 
 
 Here we are asking about your institution. 
+<br>
 
 ```{r}
 sd_question(
@@ -206,6 +212,7 @@ sd_question(
 # Prior Knowledge
 
 Here we are asking about your prior and current experience.
+<br>
 
 ```{r}
 sd_question(
@@ -293,6 +300,7 @@ sd_question(
 # Prior Skills
 
 Here we will ask you some questions about data.
+<br>
 
 ```{r}
 sd_question(
@@ -325,6 +333,7 @@ sd_question(
 # Expectations
 
 Here we will collect information on your expectations for the course.
+<br>
 
 ```{r}
 sd_question(
@@ -378,6 +387,7 @@ sd_question(
 ## Thank you for taking this survey!
 
 Click "Finish" to submit.
+<br>
 
 ```{r}
 sd_close()

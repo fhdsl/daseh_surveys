@@ -52,7 +52,7 @@ library(surveydown)
 
 --- welcome
 
-# Data Science for Environmental Health (DaSEH) Pre-course Survey
+# Data Science for Environmental Health (DaSEH) Post-course Survey
 
 Thank you for taking the time to participate in this survey. We are collecting data about user experience with our course to learn more about how to improve the data science education experience. This data may ultimately be used for a research publication and reporting to the NIH.
 
@@ -78,10 +78,15 @@ IRB No.: FHIRB0020064
 Date Approved: 3/19/2024  
 
 The IRB contact information is:
+<br>
 Address: Fred Hutch Cancer Center Institutional Review Office
+<br>
 1100 Fairview Ave. N. Mail Stop J2-100, Seattle, WA 98109
+<br>
 Telephone: 206-667-5900
+<br>
 E-mail: iro@fredhutch.org
+<br>
 
 ```{r}
 sd_question(
