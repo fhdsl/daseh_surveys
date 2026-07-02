@@ -147,11 +147,11 @@ sd_question(
   label = "**Now that you have participated in the Code-a-thon, how confident are you in your ability to use data science tools (e.g., R programming, GitHub) to answer Environmental Health related questions?**",
   row    = c(" " = "comfort_data_tools_q"),
   option = c(
-    "1 (Less comfortable)" = "1",
+    "1 (Less confident)" = "1",
     "2" = "2",
     "3" = "3",
     "4" = "4", 
-    "5 (More comfortable)" = "5"
+    "5 (More confident)" = "5"
   )
 )
 
@@ -161,11 +161,11 @@ sd_question(
   label = "**Please rate how you feel your skills have improved as a result of the Code-a-thon.**",
   row    = c(" " = "skills_q"),
   option = c(
-    "1 (Less comfortable)" = "1",
+    "1 (Less improvement)" = "1",
     "2" = "2",
     "3" = "3",
     "4" = "4", 
-    "5 (More comfortable)" = "5"
+    "5 (More improvement)" = "5"
   )
 )
 
@@ -187,11 +187,11 @@ sd_question(
              "Functional programming" = "functional_programming",
              "GitHub / version control" = "github"),
   option = c(
-    "1 (Less comfortable)" = "1",
+    "1 (Less confident)" = "1",
     "2" = "2",
     "3" = "3",
     "4" = "4", 
-    "5 (More comfortable)" = "5"
+    "5 (More confident)" = "5"
   )
 )
 
