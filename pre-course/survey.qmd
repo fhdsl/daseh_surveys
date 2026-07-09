@@ -241,30 +241,28 @@ sd_question(
 )
 
 sd_question(
-  type = "matrix",
+  type = "mc_buttons",
   id = "comfort_data_science",
   label = "**How would you rate your current comfort with data science, generally?**",
-  row    = c(" " = "comfort_data_science_q"),
   option = c(
-    "1 (Less comfortable)" = "1",
-    "2" = "2",
-    "3" = "3",
-    "4" = "4", 
-    "5 (More comfortable)" = "5"
+    "1<br>Less<br>comfortable" = "1",
+    "&emsp;&emsp;&emsp;2&emsp;&emsp;&emsp;" = "2",
+    "&emsp;&emsp;&emsp;3&emsp;&emsp;&emsp;" = "3",
+    "&emsp;&emsp;&emsp;4&emsp;&emsp;&emsp;" = "4", 
+    "5<br>More<br>comfortable" = "5"
   )
 )
 
 sd_question(
-  type = "matrix",
+  type = "mc_buttons",
   id = "comfort_data_tools",
   label = "**How confident are you in your ability to use data science tools (e.g., R programming, GitHub) to answer Environmental Health related questions?**",
-  row    = c(" " = "comfort_data_tools_q"),
   option = c(
-    "1 (Less confident)" = "1",
-    "2" = "2",
-    "3" = "3",
-    "4" = "4", 
-    "5 (More confident)" = "5"
+    "1<br>Less<br>confident" = "1",
+    "&emsp;&emsp;&emsp;2&emsp;&emsp;&emsp;" = "2",
+    "&emsp;&emsp;&emsp;3&emsp;&emsp;&emsp;" = "3",
+    "&emsp;&emsp;&emsp;4&emsp;&emsp;&emsp;" = "4", 
+    "5<br>More<br>confident" = "5"
   )
 )
 

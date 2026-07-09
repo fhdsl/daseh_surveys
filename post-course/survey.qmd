@@ -134,44 +134,41 @@ sd_question(
 
 ```{r}
 sd_question(
-  type = "matrix",
+  type = "mc_buttons",
   id = "comfort_data_science",
   label = "**Now that you have taken DaSEH's online course, how would you rate your current comfort with data science, generally?**",
-  row    = c(" " = "comfort_data_science_q"),
   option = c(
-    "1 (Less comfortable)" = "1",
-    "2" = "2",
-    "3" = "3",
-    "4" = "4", 
-    "5 (More comfortable)" = "5"
+    "1<br>Less<br>comfortable" = "1",
+    "&emsp;&emsp;&emsp;2&emsp;&emsp;&emsp;" = "2",
+    "&emsp;&emsp;&emsp;3&emsp;&emsp;&emsp;" = "3",
+    "&emsp;&emsp;&emsp;4&emsp;&emsp;&emsp;" = "4", 
+    "5<br>More<br>comfortable" = "5"
   )
 )
 
 sd_question(
-  type = "matrix",
+  type = "mc_buttons",
   id = "comfort_data_tools",
   label = "**Now that you have taken DaSEH's online course, how confident are you in your ability to use data science tools (e.g., R programming, GitHub) to answer Environmental Health related questions?**",
-  row    = c(" " = "comfort_data_tools_q"),
   option = c(
-    "1 (Less confident)" = "1",
-    "2" = "2",
-    "3" = "3",
-    "4" = "4", 
-    "5 (More confident)" = "5"
+    "1<br>Less<br>confident" = "1",
+    "&emsp;&emsp;&emsp;2&emsp;&emsp;&emsp;" = "2",
+    "&emsp;&emsp;&emsp;3&emsp;&emsp;&emsp;" = "3",
+    "&emsp;&emsp;&emsp;4&emsp;&emsp;&emsp;" = "4", 
+    "5<br>More<br>confident" = "5"
   )
 )
 
 sd_question(
-  type = "matrix",
+  type = "mc_buttons",
   id = "skills",
   label = "**Please rate how you feel your skills have improved as a result of the online course.**",
-  row    = c(" " = "skills_q"),
   option = c(
-    "1 (Less improvement)" = "1",
-    "2" = "2",
-    "3" = "3",
-    "4" = "4", 
-    "5 (More improvement)" = "5"
+    "1<br>Less<br>improvement" = "1",
+    "&emsp;&emsp;&emsp;2&emsp;&emsp;&emsp;" = "2",
+    "&emsp;&emsp;&emsp;3&emsp;&emsp;&emsp;" = "3",
+    "&emsp;&emsp;&emsp;4&emsp;&emsp;&emsp;" = "4", 
+    "5<br>More<br>improvement" = "5"
   )
 )
 
@@ -281,24 +278,22 @@ sd_question(
 
 ```{r}
 sd_question(
-  type = "matrix",
+  type = "mc_buttons",
   id = "ai_chatbot_in_course",
   label = "**How much did you use AI chatbots (e.g., ChatGPT, Claude, CoPilot) during the online course?**",
-  row    = c(" " = "ai_chatbot_in_course"),
   option = c(
-    "1 (Never)" = "1",
-    "2" = "2",
-    "3" = "3",
-    "4" = "4", 
-    "5 (Extensively)" = "5"
+    "1<br>Never" = "1",
+    "&emsp;&emsp;&emsp;2&emsp;&emsp;&emsp;" = "2",
+    "&emsp;&emsp;&emsp;3&emsp;&emsp;&emsp;" = "3",
+    "&emsp;&emsp;&emsp;4&emsp;&emsp;&emsp;" = "4", 
+    "5<br>Extensively" = "5"
   )
 )
 
 sd_question(
-  type = "matrix",
+  type = "mc_buttons",
   id = "chatbot_supplemented_learning",
   label = "**I found that AI chatbots supplemented my learning during the online course.**",
-  row    = c(" " = "chatbot_supplemented_learning_q"),
   option = c(
     "Strongly Disagree" = "strong_disagree",
     "Disagree" = "disagree",
@@ -309,10 +304,9 @@ sd_question(
 )
 
 sd_question(
-  type = "matrix",
+  type = "mc_buttons",
   id = "stronger_skills_than_bot",
   label = "**I developed stronger skills through the online course than I would have using AI chatbots alone.**",
-  row    = c(" " = "stronger_skills_than_bot_q"),
   option = c(
     "Strongly Disagree" = "strong_disagree",
     "Disagree" = "disagree",
@@ -323,10 +317,9 @@ sd_question(
 )
 
 sd_question(
-  type = "matrix",
+  type = "mc_buttons",
   id = "deeper_understanding_than_bot",
   label = "**I developed deeper understanding through the online course than I would have using AI chatbots alone.**",
-  row    = c(" " = "deeper_understanding_than_bot_q"),
   option = c(
     "Strongly Disagree" = "strong_disagree",
     "Disagree" = "disagree",
