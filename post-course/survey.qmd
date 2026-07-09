@@ -108,20 +108,20 @@ sd_question(
 
 # General Information
 
-Here we are asking general information about you.
+*Here we are asking general information about you.*
 <br>
 
 ```{r}
 sd_question(
   type  = "text",
   id    = "first_name",
-  label = "**First or Given Name:**\n\nThis will only be used to match any of your survey responses through time."
+  label = "**First or Given Name:**\n\n*This will only be used to match any of your survey responses through time.*"
 )
 
 sd_question(
   type  = "text",
   id    = "last_name",
-  label = "**Last or Family Name:**\n\nThis will only be used to match any of your survey responses through time."
+  label = "**Last or Family Name:**\n\n*This will only be used to match any of your survey responses through time.*"
 )
 ```
 
@@ -129,7 +129,7 @@ sd_question(
 
 # Post-Online Course Knowledge
 
-Here we are asking about your experience following the online course.
+*Here we are asking about your experience following the online course.*
 <br>
 
 ```{r}
@@ -178,7 +178,7 @@ sd_question(
 sd_question(
   type = "matrix",
   id = "topics",
-  label = "**Now that you have taken DaSEH's online course, how would you rate your current confidence with these specific tools or topics?**",
+  label = "**Now that you have taken DaSEH's online course, how would you rate your current confidence with these specific tools or topics?**\n\n*Mark one answer per row.*",
   row    = c("Rmarkdown / Reproducible documents" = "Rmd",
              "RStudio" = "RStudio",
              "Basic R Syntax" = "R_syntax",
@@ -204,7 +204,7 @@ sd_question(
 sd_question(
   type = "mc_multiple",
   id = "interact_material",
-  label = "**How did you interact with the online course material?**\n\nSelect all that apply. You may also use the 'Other' option, and use the optional comment box to explain further.",
+  label = "**How did you interact with the online course material?**\n\n*Select all that apply. You may also use the 'Other' option, and use the optional comment box to explain further.*",
   option = c(
     "Synchronously (attended set class times with the instructors)" = "synchronous",
     "Asynchronously (watched recordings)" = "asynchronous",
@@ -222,7 +222,7 @@ sd_question(
 sd_question(
   type = "mc_multiple",
   id = "engage_material",
-  label = "**How did you interact with the online course material?**\n\nSelect all that apply.",
+  label = "**How did you interact with the online course material?**\n\n*Select all that apply.*",
   option = c(
     "All of the material" = "all",
     "Day 1 - RStudio / Basic R" = "day1",
@@ -243,14 +243,14 @@ sd_question(
 
 # Prior Skills
 
-Here we will ask you some questions about data.
+*Here we will ask you some questions about data.*
 <br>
 
 ```{r}
 sd_question(
   type   = "textarea",
   id     = "changes_to_viz",
-  label  = "**What changes, if any, would you make to this dataset in order to do analysis or make a visualization?**\n\nPlease provide a brief answer of 1-2 sentences."
+  label  = "**What changes, if any, would you make to this dataset in order to do analysis or make a visualization?**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 ```
 
@@ -262,13 +262,13 @@ knitr::include_graphics("img/mortality.png")
 sd_question(
   type   = "textarea",
   id     = "reproducibility_practices",
-  label  = "**In your own words, describe practices you might use to make your work more transparent and reproducible in R.**\n\nPlease provide a brief answer of 1-2 sentences."
+  label  = "**In your own words, describe practices you might use to make your work more transparent and reproducible in R.**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 
 sd_question(
   type   = "textarea",
   id     = "dataset_investigation_practices",
-  label  = "**In your own words, describe a process you would typically take when investigating a new dataset.**\n\nPlease provide a brief answer of 1-2 sentences."
+  label  = "**In your own words, describe a process you would typically take when investigating a new dataset.**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 ```
 
@@ -277,7 +277,7 @@ sd_question(
 # AI and DaSEH
 <br>
 
-Your responses will be treated neutrally and will not affect future opportunities with DaSEH.
+*Your responses will be treated neutrally and will not affect future opportunities with DaSEH.*
 
 ```{r}
 sd_question(
@@ -347,14 +347,14 @@ sd_question(
 
 # Open Feedback
 
-Please provide your thoughts below.
+*Please provide your thoughts below.*
 <br>
 
 ```{r}
 sd_question(
   type   = "textarea",
   id     = "suggestions",
-  label  = "**Please provide any suggestions regarding the Code-a-thon modality.** This could be logistics, timing, projects, topics covered, standups, code review, lightning talks, etc."
+  label  = "**Please provide any suggestions regarding the Code-a-thon modality.** \n\n*This could be logistics, timing, projects, topics covered, standups, code review, lightning talks, etc.*"
 )
 
 sd_question(
@@ -368,7 +368,7 @@ sd_question(
 
 ## Thank you for taking this survey!
 
-Click "Finish" to submit.
+*Click "Finish" to submit.*
 <br>
 
 ```{r}

@@ -109,7 +109,7 @@ sd_question(
 
 # General Information
 
-Here we are asking general information about you.
+*Here we are asking general information about you.*
 <br>
 
 ```{r}
@@ -130,7 +130,7 @@ sd_question(
 
 # Post-Code-a-thon Knowledge
 
-Here we are asking about your experience following the Code-a-thon.
+*Here we are asking about your experience following the Code-a-thon.*
 <br>
 
 ```{r}
@@ -179,7 +179,7 @@ sd_question(
 sd_question(
   type = "matrix",
   id = "topics",
-  label = "**Now that you have participated in the Code-a-thon, how would you rate your current confidence with these specific tools or topics?**",
+  label = "**Now that you have participated in the Code-a-thon, how would you rate your current confidence with these specific tools or topics?**\n\n*Mark one answer per row.*",
   row    = c("Rmarkdown / Reproducible documents" = "Rmd",
              "RStudio" = "RStudio",
              "Basic R Syntax" = "R_syntax",
@@ -249,14 +249,14 @@ sd_question(
 
 # Data Skills
 
-Here we will ask you some questions about data.
+*Here we will ask you some questions about data.*
 <br>
 
 ```{r}
 sd_question(
   type   = "textarea",
   id     = "changes_to_viz",
-  label  = "**Now that you have participated in the Code-a-thon, what changes, if any, would you make to this dataset in order to do analysis or make a visualization?**\n\nPlease provide a brief answer of 1-2 sentences."
+  label  = "**Now that you have participated in the Code-a-thon, what changes, if any, would you make to this dataset in order to do analysis or make a visualization?**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 ```
 
@@ -268,13 +268,13 @@ knitr::include_graphics("img/mortality.png")
 sd_question(
   type   = "textarea",
   id     = "reproducibility_practices",
-  label  = "**Now that you have participated in the Code-a-thon, in your own words, describe practices you might use to make your work more transparent and reproducible in R.**\n\nPlease provide a brief answer of 1-2 sentences."
+  label  = "**Now that you have participated in the Code-a-thon, in your own words, describe practices you might use to make your work more transparent and reproducible in R.**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 
 sd_question(
   type   = "textarea",
   id     = "dataset_investigation_practices",
-  label  = "**Now that you have participated in the Code-a-thon, in your own words, describe a process you would typically take when investigating a new dataset.**\n\nPlease provide a brief answer of 1-2 sentences."
+  label  = "**Now that you have participated in the Code-a-thon, in your own words, describe a process you would typically take when investigating a new dataset.**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 ```
 
@@ -282,7 +282,7 @@ sd_question(
 
 # AI and DaSEH
 
-Your responses will be treated neutrally and will not affect future opportunities with DaSEH.
+*Your responses will be treated neutrally and will not affect future opportunities with DaSEH.*
 <br>
 
 ```{r}
@@ -353,20 +353,20 @@ sd_question(
 
 # Open Feedback
 
-Please provide your thoughts below.
+*Please provide your thoughts below.*
 <br>
 
 ```{r}
 sd_question(
   type   = "textarea",
   id     = "suggestions",
-  label  = "**Please provide any suggestions regarding the Code-a-thon modality.** This could be logistics, timing, projects, topics covered, standups, code review, lightning talks, etc."
+  label  = "**Please provide any suggestions regarding the Code-a-thon modality.**\n\n*This could be logistics, timing, projects, topics covered, standups, code review, lightning talks, etc.*"
 )
 
 sd_question(
   type   = "textarea",
   id     = "feedback",
-  label  = "**Please provide any feedback that you think could help us improve the DaSEH Code-a-thon.**\n\nYou can provide anonymous feedback here: https://forms.gle/hQ7jdHZSZoDpHAdE6."
+  label  = "**Please provide any feedback that you think could help us improve the DaSEH Code-a-thon.**\n\n*You can provide anonymous feedback here: https://forms.gle/hQ7jdHZSZoDpHAdE6.*"
 )
 ```
 
@@ -374,7 +374,7 @@ sd_question(
 
 ## Thank you for taking this survey!
 
-Click "Finish" to submit.
+*Click "Finish" to submit.*
 <br>
 
 ```{r}

@@ -103,26 +103,26 @@ sd_question(
 
 # General Information
 
-Here we are asking general information about you.
+*Here we are asking general information about you.*
 <br>
 
 ```{r}
 sd_question(
   type  = "text",
   id    = "first_name",
-  label = "**First or Given Name:**\n\nThis will only be used to match any of your survey responses through time."
+  label = "**First or Given Name:**\n\n*This will only be used to match any of your survey responses through time.*"
 )
 
 sd_question(
   type  = "text",
   id    = "last_name",
-  label = "**Last or Family Name:**\n\nThis will only be used to match any of your survey responses through time."
+  label = "**Last or Family Name:**\n\n*This will only be used to match any of your survey responses through time.*"
 )
 
 sd_question(
   type  = "mc",
   id    = "role",
-  label = "**Which best describes your current role?**\n\nIf you choose 'Other', an optional comment box will appear.",
+  label = "**Which best describes your current role?**\n\n*If you choose 'Other', an optional comment box will appear.*",
   option = c(
     "Student" = "student",
     "Postdoctoral Researcher" = "postdoc",
@@ -143,14 +143,14 @@ sd_question(
 
 # Institution information 
 
-Here we are asking about your institution. 
+*Here we are asking about your institution.*
 <br>
 
 ```{r}
 sd_question(
   type  = "mc",
   id    = "academic_institution",
-  label = '**Do you work or study at an academic institution?**\n\nAn academic institution typically grants academic degrees. Please select "Yes" if you are a student, or work more than 50% of the time at an academic institution.',
+  label = '**Do you work or study at an academic institution?**\n\n*An academic institution typically grants academic degrees. Please select "Yes" if you are a student, or work more than 50% of the time at an academic institution.*',
   option = c(
     "Yes" = "yes",
     "No" = "no"
@@ -160,7 +160,7 @@ sd_question(
 sd_question(
   type  = "mc_multiple",
   id    = "academic_institution_more",
-  label = '**Which of the following describe your institution?**\n\nSelect any that apply. You may also use the "Other" option to describe. If you choose "Other", an optional comment box will appear.\n\nIf you are not sure, you can look up your research institution status [here](https://carnegieclassifications.acenet.edu/institutions/?&target=_blank). You can look up minority-serving status [here](https://msiexchange.nasa.gov/pdf/2023-2024%20MSI%20List.pdf?&target=_blank).',
+  label = '**Which of the following describe your institution?**\n\n*Select any that apply. You may also use the "Other" option to describe. If you choose "Other", an optional comment box will appear.\n\nIf you are not sure, you can look up your research institution status [here](https://carnegieclassifications.acenet.edu/institutions/?&target=_blank). You can look up minority-serving status [here](https://msiexchange.nasa.gov/pdf/2023-2024%20MSI%20List.pdf?&target=_blank).*',
   option = c(
     "Doctoral Universities -- Very high research activity ('R1')" = "R1",
     "Doctoral Universities -- High research activity ('R2')" = "R2",
@@ -187,7 +187,7 @@ sd_question(
 sd_question(
   type  = "mc_multiple",
   id    = "organization",
-  label = '**Which of the following describe your institution?**\n\nSelect any that apply. You may also use the "Other" option to describe. If you choose "Other", an optional comment box will appear.',
+  label = '**Which of the following describe your institution?**\n\n*Select any that apply. You may also use the "Other" option to describe. If you choose "Other", an optional comment box will appear.*',
   option = c(
     "Government - Local" = "local_govt",
     "Government - State" = "state_govt",
@@ -211,7 +211,7 @@ sd_question(
 
 # Prior Knowledge
 
-Here we are asking about your prior and current experience.
+*Here we are asking about your prior and current experience.*
 <br>
 
 ```{r}
@@ -230,7 +230,7 @@ sd_question(
 sd_question(
   type  = "mc_multiple",
   id    = "experience_with_tools",
-  label = '**Which of the following do you have experience with?**\n\nSelect all that apply.',
+  label = '**Which of the following do you have experience with?**\n\n*Select all that apply.*',
   option = c(
     "Excel and/or Google sheets" = "sheets",
     "Git/GitHub for version control" = "git",
@@ -271,7 +271,7 @@ sd_question(
 sd_question(
   type = "matrix",
   id = "topics",
-  label = "**How would you rate your current confidence with these specific tools or topics?**\n\nMark one circle per row.",
+  label = "**How would you rate your current confidence with these specific tools or topics?**\n\n*Mark one answer per row.*",
   row    = c("Rmarkdown / Reproducible documents" = "Rmd",
              "RStudio" = "RStudio",
              "Basic R Syntax" = "R_syntax",
@@ -299,14 +299,14 @@ sd_question(
 
 # Prior Skills
 
-Here we will ask you some questions about data.
+*Here we will ask you some questions about data.*
 <br>
 
 ```{r}
 sd_question(
   type   = "textarea",
   id     = "changes_to_viz",
-  label  = "**What changes, if any, would you make to this dataset in order to do analysis or make a visualization?**\n\nPlease provide a brief answer of 1-2 sentences."
+  label  = "**What changes, if any, would you make to this dataset in order to do analysis or make a visualization?**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 ```
 
@@ -318,13 +318,13 @@ knitr::include_graphics("img/mortality.png")
 sd_question(
   type   = "textarea",
   id     = "reproducibility_practices",
-  label  = "**In your own words, describe practices you might use to make your work more transparent and reproducible in R.**\n\nPlease provide a brief answer of 1-2 sentences."
+  label  = "**In your own words, describe practices you might use to make your work more transparent and reproducible in R.**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 
 sd_question(
   type   = "textarea",
   id     = "dataset_investigation_practices",
-  label  = "**In your own words, describe a process you would typically take when investigating a new dataset.**\n\nPlease provide a brief answer of 1-2 sentences."
+  label  = "**In your own words, describe a process you would typically take when investigating a new dataset.**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 ```
 
@@ -332,14 +332,14 @@ sd_question(
 
 # Expectations
 
-Here we will collect information on your expectations for the course.
+*Here we will collect information on your expectations for the course.*
 <br>
 
 ```{r}
 sd_question(
   type = "mc_multiple",
   id = "concerns",
-  label = "**What are your concerns about this course?**\n\nSelect any that apply. You may also use the 'Other' option, and use the optional comment box to explain further.",
+  label = "**What are your concerns about this course?**\n\n*Select any that apply. You may also use the 'Other' option, and use the optional comment box to explain further.*",
   option = c(
     "The technical nature of the material" = "technical",
     "My ability to keep up with the pace of the course" = "course_pace",
@@ -359,7 +359,7 @@ sd_question(
 sd_question(
   type = "mc_multiple",
   id = "benefits",
-  label = "**How do you think learning R and more about data science will benefit your studies/career?**\n\nSelect any that apply. You may also use the 'Other' option, and use the optional comment box to explain further.",
+  label = "**How do you think learning R and more about data science will benefit your studies/career?**\n\n*Select any that apply. You may also use the 'Other' option, and use the optional comment box to explain further.*",
   option = c(
     "Improve data analysis skills" = "data_analysis",
     "Enhance career prospects and competitiveness" = "career_prospects",
@@ -386,7 +386,7 @@ sd_question(
 
 ## Thank you for taking this survey!
 
-Click "Finish" to submit.
+*Click "Finish" to submit.*
 <br>
 
 ```{r}
