@@ -366,8 +366,7 @@ sd_question(
 sd_question(
   type   = "textarea",
   id     = "feedback",
-  label  = "**Please provide any feedback that you think could help us improve the DaSEH Code-a-thon.**\n\nYou can provide anonymous feedback
-here: https://forms.gle/hQ7jdHZSZoDpHAdE6."
+  label  = "**Please provide any feedback that you think could help us improve the DaSEH Code-a-thon.**\n\nYou can provide anonymous feedback here: https://forms.gle/hQ7jdHZSZoDpHAdE6."
 )
 ```
 
