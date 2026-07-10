@@ -27,17 +27,11 @@ survey-settings:
     - consent2
     - first_name
     - last_name
+    - pre_course_R
+    - experience_with_tools
     - comfort_data_science
-    - comfort_data_skills
-    - skills
+    - comfort_data_tools
     - topics
-    - codeathon_R_skills
-    - codeathon_skills_new_ways
-    - codeathon_learned_more
-    - ai_chatbot_in_codeathon
-    - chatbot_supplemented_learning
-    - stronger_skills_than_bot
-    - deeper_understanding_than_bot
 
 # Use this section to customize system messages
 system-messages:
@@ -53,7 +47,7 @@ library(surveydown)
 
 --- welcome
 
-# Data Science for Environmental Health (DaSEH) Post-Codeathon Course Survey
+# Data Science for Environmental Health (DaSEH) Pre-course Survey
 
 Thank you for taking the time to participate in this survey. We are collecting data about user experience with our course to learn more about how to improve the data science education experience. This data may ultimately be used for a research publication and reporting to the NIH.
 
@@ -124,20 +118,132 @@ sd_question(
   id    = "last_name",
   label = "**Last or Family Name:**\n\n*This will only be used to match any of your survey responses through time.*"
 )
+
+sd_question(
+  type  = "mc",
+  id    = "role",
+  label = "**Which best describes your current role?**\n\n*If you choose 'Other', an optional comment box will appear.*",
+  option = c(
+    "Student" = "student",
+    "Postdoctoral Researcher" = "postdoc",
+    "Faculty / Instructor" = "faculty",
+    "Professional in Government or Industry" = "professional",
+    "Other" = "other"
+  )
+)
+
+sd_question(
+  type  = "text",
+  id    = "role_other",
+  label = "Please specify:"
+)
 ```
 
---- page3
+--- institution
 
-# Post-Code-a-thon Knowledge
+# Institution information 
 
-*Here we are asking about your experience following the Code-a-thon.*
+*Here we are asking about your institution.*
 <br>
 
 ```{r}
 sd_question(
+  type  = "mc",
+  id    = "academic_institution",
+  label = '**Do you work or study at an academic institution?**\n\n*An academic institution typically grants academic degrees. Please select "Yes" if you are a student, or work more than 50% of the time at an academic institution.*',
+  option = c(
+    "Yes" = "yes",
+    "No" = "no"
+  )
+)
+
+sd_question(
+  type  = "mc_multiple",
+  id    = "academic_institution_more",
+  label = '**Which of the following describe your institution?**\n\n*Select any that apply. You may also use the "Other" option to describe. If you choose "Other", an optional comment box will appear.*\n\n*If you are not sure, you can look up your research institution status [here](https://carnegieclassifications.acenet.edu/institutions/?&target=_blank). You can look up minority-serving status [here](https://msiexchange.nasa.gov/pdf/2023-2024%20MSI%20List.pdf?&target=_blank).*',
+  option = c(
+    "Doctoral Universities -- Very high research activity ('R1')" = "R1",
+    "Doctoral Universities -- High research activity ('R2')" = "R2",
+    "Master's College or University" = "masters",
+    "Primarily Undergraduate Institution (PUI)" = "pui",
+    "Community College" = "cc",
+    "Historically Black College or University (HBCU)" = "hbcu",
+    "Hispanic Serving Institution (HSI)" = "hsi",
+    "Tribal College or University (TCU)" = "tcu",
+    "Native American-Serving, Nontribal Institutions (NASNTI)" = "nasnti",
+    "Asian American and Native American Pacific Islander-Serving Institution (AANAPISI)" = "aanapisi",
+    "Other under-resourced institution" = "other_under_resource",
+    "Not sure" = "not_sure",
+    "Other" = "other"
+  )
+)
+
+sd_question(
+  type  = "text",
+  id    = "academic_institution_more_other",
+  label = "Please specify:"
+)
+
+sd_question(
+  type  = "mc_multiple",
+  id    = "organization",
+  label = '**Which of the following describe your institution?**\n\n*Select any that apply. You may also use the "Other" option to describe. If you choose "Other", an optional comment box will appear.*',
+  option = c(
+    "Government - Local" = "local_govt",
+    "Government - State" = "state_govt",
+    "Government - Federal" = "federal_govt",
+    "Research Center" = "research_center",
+    "Not-for-profit Organization" = "npo",
+    "For-profit Organization" = "for_profit",
+    "Not sure" = "not_sure",
+    "Other" = "other"
+  )
+)
+
+sd_question(
+  type  = "text",
+  id    = "organization_other",
+  label = "Please specify:"
+)
+```
+
+--- prior_knowledge
+
+# Prior Knowledge
+
+*Here we are asking about your prior and current experience.*
+<br>
+
+```{r}
+sd_question(
+  type  = "mc",
+  id    = "pre_course_R",
+  label = '**Which of the following describes your pre-course experience with R?**',
+  option = c(
+    "I have no experience with R" = "none",
+    "I have tried R, but am not experienced" = "tried",
+    "I use R occasionally" = "occasional",
+    "I use R almost daily" = "daily"
+  )
+)
+
+sd_question(
+  type  = "mc_multiple",
+  id    = "experience_with_tools",
+  label = '**Which of the following do you have experience with?**\n\n*Select all that apply.*',
+  option = c(
+    "Excel and/or Google sheets" = "sheets",
+    "Git/GitHub for version control" = "git",
+    "Statistical tools (e.g., SAS, Stata, etc.)" = "stat_tools",
+    "Other programming language(s), besides R (e.g., C, C++, Java, JavaScript, Python, Julia, etc.)" = "other_programming",
+    "None of these" = "none"
+  )
+)
+
+sd_question(
   type = "mc_buttons",
   id = "comfort_data_science",
-  label = "**Now that you have participated in the Code-a-thon, how would you rate your current comfort with data science, generally?**",
+  label = "**How would you rate your current comfort with data science, generally?**",
   option = c(
     "1<br>Less<br>comfortable" = "1",
     "&emsp;&emsp;&emsp;2&emsp;&emsp;&emsp;" = "2",
@@ -150,7 +256,7 @@ sd_question(
 sd_question(
   type = "mc_buttons",
   id = "comfort_data_tools",
-  label = "**Now that you have participated in the Code-a-thon, how confident are you in your ability to use data science tools (e.g., R programming, GitHub) to answer Environmental Health related questions?**",
+  label = "**How confident are you in your ability to use data science tools (e.g., R programming, GitHub) to answer Environmental Health related questions?**",
   option = c(
     "1<br>Less<br>confident" = "1",
     "&emsp;&emsp;&emsp;2&emsp;&emsp;&emsp;" = "2",
@@ -161,22 +267,9 @@ sd_question(
 )
 
 sd_question(
-  type = "mc_buttons",
-  id = "skills",
-  label = "**Please rate how you feel your skills have improved as a result of the Code-a-thon.**",
-  option = c(
-    "1<br>Less<br>improvement" = "1",
-    "&emsp;&emsp;&emsp;2&emsp;&emsp;&emsp;" = "2",
-    "&emsp;&emsp;&emsp;3&emsp;&emsp;&emsp;" = "3",
-    "&emsp;&emsp;&emsp;4&emsp;&emsp;&emsp;" = "4", 
-    "5<br>More<br>improvement" = "5"
-  )
-)
-
-sd_question(
   type = "matrix",
   id = "topics",
-  label = "**Now that you have participated in the Code-a-thon, how would you rate your current confidence with these specific tools or topics?**\n\n*Mark one answer per row.*",
+  label = "**How would you rate your current confidence with these specific tools or topics?**\n\n*Mark one answer per row.*",
   row    = c("Rmarkdown / Reproducible documents" = "Rmd",
              "RStudio" = "RStudio",
              "Basic R Syntax" = "R_syntax",
@@ -198,50 +291,11 @@ sd_question(
     "5 (More confident)" = "5"
   )
 )
-
-sd_question(
-  type = "mc_buttons",
-  id = "codeathon_R_skills",
-  label = "**The Code-a-thon helped me recall and apply my R skills.**",
-  option = c(
-    "Strongly Disagree" = "strong_disagree",
-    "Disagree" = "disagree",
-    "Neutral" = "neutral",
-    "Agree" = "agree", 
-    "Strongly Agree" = "strong_agree"
-  )
-)
-
-sd_question(
-  type = "mc_buttons",
-  id = "codeathon_skills_new_ways",
-  label = "**The Code-a-thon challenged me to use skills from the online course in new ways.**",
-  option = c(
-    "Strongly Disagree" = "strong_disagree",
-    "Disagree" = "disagree",
-    "Neutral" = "neutral",
-    "Agree" = "agree", 
-    "Strongly Agree" = "strong_agree"
-  )
-)
-
-sd_question(
-  type = "mc_buttons",
-  id = "codeathon_learned_more",
-  label = "**I learned more because of the Code-a-thon than I would have from the online course alone.**",
-  option = c(
-    "Strongly Disagree" = "strong_disagree",
-    "Disagree" = "disagree",
-    "Neutral" = "neutral",
-    "Agree" = "agree", 
-    "Strongly Agree" = "strong_agree"
-  )
-)
 ```
 
---- page4
+--- prior_skills
 
-# Data Skills
+# Prior Skills
 
 *Here we will ask you some questions about data.*
 <br>
@@ -250,7 +304,7 @@ sd_question(
 sd_question(
   type   = "textarea",
   id     = "changes_to_viz",
-  label  = "**Now that you have participated in the Code-a-thon, what changes, if any, would you make to this dataset in order to do analysis or make a visualization?**\n\n*Please provide a brief answer of 1-2 sentences.*"
+  label  = "**What changes, if any, would you make to this dataset in order to do analysis or make a visualization?**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 ```
 
@@ -262,101 +316,67 @@ knitr::include_graphics("img/mortality.png")
 sd_question(
   type   = "textarea",
   id     = "reproducibility_practices",
-  label  = "**Now that you have participated in the Code-a-thon, in your own words, describe practices you might use to make your work more transparent and reproducible in R.**\n\n*Please provide a brief answer of 1-2 sentences.*"
+  label  = "**In your own words, describe practices you might use to make your work more transparent and reproducible in R.**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 
 sd_question(
   type   = "textarea",
   id     = "dataset_investigation_practices",
-  label  = "**Now that you have participated in the Code-a-thon, in your own words, describe a process you would typically take when investigating a new dataset.**\n\n*Please provide a brief answer of 1-2 sentences.*"
+  label  = "**In your own words, describe a process you would typically take when investigating a new dataset.**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 ```
 
---- ai
+--- expectations
 
-# AI and DaSEH
+# Expectations
 
-*Your responses will be treated neutrally and will not affect future opportunities with DaSEH.*
+*Here we will collect information on your expectations for the course.*
 <br>
 
 ```{r}
 sd_question(
-  type = "mc_buttons",
-  id = "ai_chatbot_in_codeathon",
-  label = "**How much did you use AI chatbots (e.g., ChatGPT, Claude, CoPilot) during the Code-a-thon?**",
+  type = "mc_multiple",
+  id = "concerns",
+  label = "**What are your concerns about this course?**\n\n*Select any that apply. You may also use the 'Other' option, and use the optional comment box to explain further.*",
   option = c(
-    "1<br>Never" = "1",
-    "&emsp;&emsp;&emsp;2&emsp;&emsp;&emsp;" = "2",
-    "&emsp;&emsp;&emsp;3&emsp;&emsp;&emsp;" = "3",
-    "&emsp;&emsp;&emsp;4&emsp;&emsp;&emsp;" = "4", 
-    "5<br>Extensively" = "5"
+    "The technical nature of the material" = "technical",
+    "My ability to keep up with the pace of the course" = "course_pace",
+    "My lack of experience with data science or R programming" = "lack_experience",
+    "The time commitment required for the course" = "time_commitment",
+    "None of these" = "none",
+    "Other" = "other"
   )
 )
 
 sd_question(
-  type = "mc_buttons",
-  id = "chatbot_supplemented_learning",
-  label = "**I found that AI chatbots supplemented my learning during the Code-a-thon.**",
+  type = "text",
+  id = "concerns_other",
+  label = "Please specify:"
+)
+
+sd_question(
+  type = "mc_multiple",
+  id = "benefits",
+  label = "**How do you think learning R and more about data science will benefit your studies/career?**\n\n*Select any that apply. You may also use the 'Other' option, and use the optional comment box to explain further.*",
   option = c(
-    "Strongly Disagree" = "strong_disagree",
-    "Disagree" = "disagree",
-    "Neutral" = "neutral",
-    "Agree" = "agree", 
-    "Strongly Agree" = "strong_agree"
+    "Improve data analysis skills" = "data_analysis",
+    "Enhance career prospects and competitiveness" = "career_prospects",
+    "Improve collaboration and reproducibility in research" = "collaboration",
+    "Support decision-making in environmental health policies" = "envt_health_decisions",
+    "Enable more efficient and effective data visualization" = "data_viz",
+    "Support statistical and modeling applications" = "stat_modeling_application",
+    "Automate repetitive tasks in data processing" = "automate_data_processing",
+    "Improve ability to handle large datasets" = "handle_large_data",
+    "Enhance ability to create custom analytical tools" = "custom_tools",
+    "Improve ability to teach others" = "teach_others",
+    "Other" = "other"
   )
 )
 
 sd_question(
-  type = "mc_buttons",
-  id = "stronger_skills_than_bot",
-  label = "**I developed stronger skills through the Code-a-thon than I would have using AI chatbots alone.**",
-  option = c(
-    "Strongly Disagree" = "strong_disagree",
-    "Disagree" = "disagree",
-    "Neutral" = "neutral",
-    "Agree" = "agree", 
-    "Strongly Agree" = "strong_agree"
-  )
-)
-
-sd_question(
-  type = "mc_buttons",
-  id = "deeper_understanding_than_bot",
-  label = "**I developed deeper understanding through the Code-a-thon than I would have using AI chatbots alone.**",
-  option = c(
-    "Strongly Disagree" = "strong_disagree",
-    "Disagree" = "disagree",
-    "Neutral" = "neutral",
-    "Agree" = "agree", 
-    "Strongly Agree" = "strong_agree"
-  )
-)
-
-sd_question(
-  type   = "textarea",
-  id     = "ai_long_response",
-  label  = "**(OPTIONAL) Feel free to explain or describe any responses above.**"
-)
-```
-
---- open_feedback
-
-# Open Feedback
-
-*Please provide your thoughts below.*
-<br>
-
-```{r}
-sd_question(
-  type   = "textarea",
-  id     = "suggestions",
-  label  = "**Please provide any suggestions regarding the Code-a-thon modality.**\n\n*This could be logistics, timing, projects, topics covered, standups, code review, lightning talks, etc.*"
-)
-
-sd_question(
-  type   = "textarea",
-  id     = "feedback",
-  label  = "**Please provide any feedback that you think could help us improve the DaSEH Code-a-thon.**\n\n*You can provide anonymous feedback here: https://forms.gle/hQ7jdHZSZoDpHAdE6.*"
+  type = "text",
+  id = "benefits_other",
+  label = "Please specify:"
 )
 ```
 

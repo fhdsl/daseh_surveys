@@ -28,13 +28,12 @@ survey-settings:
     - first_name
     - last_name
     - comfort_data_science
-    - comfort_data_skills
+    - comfort_data_tools
     - skills
     - topics
-    - codeathon_R_skills
-    - codeathon_skills_new_ways
-    - codeathon_learned_more
-    - ai_chatbot_in_codeathon
+    - interact_material
+    - engage_material
+    - ai_chatbot_in_course
     - chatbot_supplemented_learning
     - stronger_skills_than_bot
     - deeper_understanding_than_bot
@@ -53,7 +52,7 @@ library(surveydown)
 
 --- welcome
 
-# Data Science for Environmental Health (DaSEH) Post-Codeathon Course Survey
+# Data Science for Environmental Health (DaSEH) Post-course Survey
 
 Thank you for taking the time to participate in this survey. We are collecting data about user experience with our course to learn more about how to improve the data science education experience. This data may ultimately be used for a research publication and reporting to the NIH.
 
@@ -126,18 +125,18 @@ sd_question(
 )
 ```
 
---- page3
+--- post_course_knowledge
 
-# Post-Code-a-thon Knowledge
+# Post-Online Course Knowledge
 
-*Here we are asking about your experience following the Code-a-thon.*
+*Here we are asking about your experience following the online course.*
 <br>
 
 ```{r}
 sd_question(
   type = "mc_buttons",
   id = "comfort_data_science",
-  label = "**Now that you have participated in the Code-a-thon, how would you rate your current comfort with data science, generally?**",
+  label = "**Now that you have taken DaSEH's online course, how would you rate your current comfort with data science, generally?**",
   option = c(
     "1<br>Less<br>comfortable" = "1",
     "&emsp;&emsp;&emsp;2&emsp;&emsp;&emsp;" = "2",
@@ -150,7 +149,7 @@ sd_question(
 sd_question(
   type = "mc_buttons",
   id = "comfort_data_tools",
-  label = "**Now that you have participated in the Code-a-thon, how confident are you in your ability to use data science tools (e.g., R programming, GitHub) to answer Environmental Health related questions?**",
+  label = "**Now that you have taken DaSEH's online course, how confident are you in your ability to use data science tools (e.g., R programming, GitHub) to answer Environmental Health related questions?**",
   option = c(
     "1<br>Less<br>confident" = "1",
     "&emsp;&emsp;&emsp;2&emsp;&emsp;&emsp;" = "2",
@@ -163,7 +162,7 @@ sd_question(
 sd_question(
   type = "mc_buttons",
   id = "skills",
-  label = "**Please rate how you feel your skills have improved as a result of the Code-a-thon.**",
+  label = "**Please rate how you feel your skills have improved as a result of the online course.**",
   option = c(
     "1<br>Less<br>improvement" = "1",
     "&emsp;&emsp;&emsp;2&emsp;&emsp;&emsp;" = "2",
@@ -176,7 +175,7 @@ sd_question(
 sd_question(
   type = "matrix",
   id = "topics",
-  label = "**Now that you have participated in the Code-a-thon, how would you rate your current confidence with these specific tools or topics?**\n\n*Mark one answer per row.*",
+  label = "**Now that you have taken DaSEH's online course, how would you rate your current confidence with these specific tools or topics?**\n\n*Mark one answer per row.*",
   row    = c("Rmarkdown / Reproducible documents" = "Rmd",
              "RStudio" = "RStudio",
              "Basic R Syntax" = "R_syntax",
@@ -200,48 +199,46 @@ sd_question(
 )
 
 sd_question(
-  type = "mc_buttons",
-  id = "codeathon_R_skills",
-  label = "**The Code-a-thon helped me recall and apply my R skills.**",
+  type = "mc_multiple",
+  id = "interact_material",
+  label = "**How did you interact with the online course material?**\n\n*Select all that apply. You may also use the 'Other' option, and use the optional comment box to explain further.*",
   option = c(
-    "Strongly Disagree" = "strong_disagree",
-    "Disagree" = "disagree",
-    "Neutral" = "neutral",
-    "Agree" = "agree", 
-    "Strongly Agree" = "strong_agree"
+    "Synchronously (attended set class times with the instructors)" = "synchronous",
+    "Asynchronously (watched recordings)" = "asynchronous",
+    "Completed optional homeworks" = "homework",
+    "Other" = "other"
   )
 )
 
 sd_question(
-  type = "mc_buttons",
-  id = "codeathon_skills_new_ways",
-  label = "**The Code-a-thon challenged me to use skills from the online course in new ways.**",
-  option = c(
-    "Strongly Disagree" = "strong_disagree",
-    "Disagree" = "disagree",
-    "Neutral" = "neutral",
-    "Agree" = "agree", 
-    "Strongly Agree" = "strong_agree"
-  )
+  type = "text",
+  id = "interact_material_other",
+  label = "Please specify:"
 )
 
 sd_question(
-  type = "mc_buttons",
-  id = "codeathon_learned_more",
-  label = "**I learned more because of the Code-a-thon than I would have from the online course alone.**",
+  type = "mc_multiple",
+  id = "engage_material",
+  label = "**How did you interact with the online course material?**\n\n*Select all that apply.*",
   option = c(
-    "Strongly Disagree" = "strong_disagree",
-    "Disagree" = "disagree",
-    "Neutral" = "neutral",
-    "Agree" = "agree", 
-    "Strongly Agree" = "strong_agree"
+    "All of the material" = "all",
+    "Day 1 - RStudio / Basic R" = "day1",
+    "Day 2 - Basic R / Reproducibility / Data Input" = "day2",
+    "Day 3 - Subsetting Data" = "day3",
+    "Day 4 - Summarizing Data / Data Classes" = "day4",
+    "Day 5 - Cleaning Data" = "day5",
+    "Day 6 - Manipulating Data / Esquisse" = "day6",
+    "Day 7 - Data Visualization / Factors" = "day7",
+    "Day 8 - Statistics / Data Output" = "day8",
+    "Day 9 - Functions" = "day9",
+    "None of the material" = "none"
   )
 )
 ```
 
---- page4
+--- prior_skills
 
-# Data Skills
+# Prior Skills
 
 *Here we will ask you some questions about data.*
 <br>
@@ -250,7 +247,7 @@ sd_question(
 sd_question(
   type   = "textarea",
   id     = "changes_to_viz",
-  label  = "**Now that you have participated in the Code-a-thon, what changes, if any, would you make to this dataset in order to do analysis or make a visualization?**\n\n*Please provide a brief answer of 1-2 sentences.*"
+  label  = "**Now that you have taken DaSEH's Online Course, what changes, if any, would you make to this dataset in order to do analysis or make a visualization?**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 ```
 
@@ -262,13 +259,13 @@ knitr::include_graphics("img/mortality.png")
 sd_question(
   type   = "textarea",
   id     = "reproducibility_practices",
-  label  = "**Now that you have participated in the Code-a-thon, in your own words, describe practices you might use to make your work more transparent and reproducible in R.**\n\n*Please provide a brief answer of 1-2 sentences.*"
+  label  = "**Now that you have taken DaSEH's Online Course, in your own words, describe practices you might use to make your work more transparent and reproducible in R.**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 
 sd_question(
   type   = "textarea",
   id     = "dataset_investigation_practices",
-  label  = "**Now that you have participated in the Code-a-thon, in your own words, describe a process you would typically take when investigating a new dataset.**\n\n*Please provide a brief answer of 1-2 sentences.*"
+  label  = "**Now that you have taken DaSEH's Online Course, in your own words, describe a process you would typically take when investigating a new dataset.**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 ```
 
@@ -282,8 +279,8 @@ sd_question(
 ```{r}
 sd_question(
   type = "mc_buttons",
-  id = "ai_chatbot_in_codeathon",
-  label = "**How much did you use AI chatbots (e.g., ChatGPT, Claude, CoPilot) during the Code-a-thon?**",
+  id = "ai_chatbot_in_course",
+  label = "**How much did you use AI chatbots (e.g., ChatGPT, Claude, CoPilot) during the online course?**",
   option = c(
     "1<br>Never" = "1",
     "&emsp;&emsp;&emsp;2&emsp;&emsp;&emsp;" = "2",
@@ -296,7 +293,7 @@ sd_question(
 sd_question(
   type = "mc_buttons",
   id = "chatbot_supplemented_learning",
-  label = "**I found that AI chatbots supplemented my learning during the Code-a-thon.**",
+  label = "**I found that AI chatbots supplemented my learning during the online course.**",
   option = c(
     "Strongly Disagree" = "strong_disagree",
     "Disagree" = "disagree",
@@ -309,7 +306,7 @@ sd_question(
 sd_question(
   type = "mc_buttons",
   id = "stronger_skills_than_bot",
-  label = "**I developed stronger skills through the Code-a-thon than I would have using AI chatbots alone.**",
+  label = "**I developed stronger skills through the online course than I would have using AI chatbots alone.**",
   option = c(
     "Strongly Disagree" = "strong_disagree",
     "Disagree" = "disagree",
@@ -322,7 +319,7 @@ sd_question(
 sd_question(
   type = "mc_buttons",
   id = "deeper_understanding_than_bot",
-  label = "**I developed deeper understanding through the Code-a-thon than I would have using AI chatbots alone.**",
+  label = "**I developed deeper understanding through the online course than I would have using AI chatbots alone.**",
   option = c(
     "Strongly Disagree" = "strong_disagree",
     "Disagree" = "disagree",
@@ -349,14 +346,8 @@ sd_question(
 ```{r}
 sd_question(
   type   = "textarea",
-  id     = "suggestions",
-  label  = "**Please provide any suggestions regarding the Code-a-thon modality.**\n\n*This could be logistics, timing, projects, topics covered, standups, code review, lightning talks, etc.*"
-)
-
-sd_question(
-  type   = "textarea",
   id     = "feedback",
-  label  = "**Please provide any feedback that you think could help us improve the DaSEH Code-a-thon.**\n\n*You can provide anonymous feedback here: https://forms.gle/hQ7jdHZSZoDpHAdE6.*"
+  label  = "**Please provide any feedback that you think could help us improve the DaSEH Online Course.**"
 )
 ```
 
