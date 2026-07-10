@@ -247,7 +247,7 @@ sd_question(
 sd_question(
   type   = "textarea",
   id     = "changes_to_viz",
-  label  = "**What changes, if any, would you make to this dataset in order to do analysis or make a visualization?**\n\n*Please provide a brief answer of 1-2 sentences.*"
+  label  = "**Now that you have taken DaSEH's Online Course, what changes, if any, would you make to this dataset in order to do analysis or make a visualization?**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 ```
 
@@ -259,22 +259,22 @@ knitr::include_graphics("img/mortality.png")
 sd_question(
   type   = "textarea",
   id     = "reproducibility_practices",
-  label  = "**In your own words, describe practices you might use to make your work more transparent and reproducible in R.**\n\n*Please provide a brief answer of 1-2 sentences.*"
+  label  = "**Now that you have taken DaSEH's Online Course, in your own words, describe practices you might use to make your work more transparent and reproducible in R.**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 
 sd_question(
   type   = "textarea",
   id     = "dataset_investigation_practices",
-  label  = "**In your own words, describe a process you would typically take when investigating a new dataset.**\n\n*Please provide a brief answer of 1-2 sentences.*"
+  label  = "**Now that you have taken DaSEH's Online Course, in your own words, describe a process you would typically take when investigating a new dataset.**\n\n*Please provide a brief answer of 1-2 sentences.*"
 )
 ```
 
 --- ai
 
 # AI and DaSEH
-<br>
 
 *Your responses will be treated neutrally and will not affect future opportunities with DaSEH.*
+<br>
 
 ```{r}
 sd_question(
@@ -346,14 +346,8 @@ sd_question(
 ```{r}
 sd_question(
   type   = "textarea",
-  id     = "suggestions",
-  label  = "**Please provide any suggestions regarding the Code-a-thon modality.** \n\n*This could be logistics, timing, projects, topics covered, standups, code review, lightning talks, etc.*"
-)
-
-sd_question(
-  type   = "textarea",
   id     = "feedback",
-  label  = "**Please provide any feedback that you think could help us improve the DaSEH online course.**"
+  label  = "**Please provide any feedback that you think could help us improve the DaSEH Online Course.**"
 )
 ```
 
