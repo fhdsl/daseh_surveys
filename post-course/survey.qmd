@@ -28,7 +28,7 @@ survey-settings:
     - first_name
     - last_name
     - comfort_data_science
-    - comfort_data_skills
+    - comfort_data_tools
     - skills
     - topics
     - interact_material
