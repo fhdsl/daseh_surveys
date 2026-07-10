@@ -30,7 +30,7 @@ survey-settings:
     - pre_course_R
     - experience_with_tools
     - comfort_data_science
-    - comfort_data_skills
+    - comfort_data_tools
     - topics
 
 # Use this section to customize system messages
@@ -160,7 +160,7 @@ sd_question(
 sd_question(
   type  = "mc_multiple",
   id    = "academic_institution_more",
-  label = '**Which of the following describe your institution?**\n\n*Select any that apply. You may also use the "Other" option to describe. If you choose "Other", an optional comment box will appear.\n\nIf you are not sure, you can look up your research institution status [here](https://carnegieclassifications.acenet.edu/institutions/?&target=_blank). You can look up minority-serving status [here](https://msiexchange.nasa.gov/pdf/2023-2024%20MSI%20List.pdf?&target=_blank).*',
+  label = '**Which of the following describe your institution?**\n\n*Select any that apply. You may also use the "Other" option to describe. If you choose "Other", an optional comment box will appear.*\n\n*If you are not sure, you can look up your research institution status [here](https://carnegieclassifications.acenet.edu/institutions/?&target=_blank). You can look up minority-serving status [here](https://msiexchange.nasa.gov/pdf/2023-2024%20MSI%20List.pdf?&target=_blank).*',
   option = c(
     "Doctoral Universities -- Very high research activity ('R1')" = "R1",
     "Doctoral Universities -- High research activity ('R2')" = "R2",
